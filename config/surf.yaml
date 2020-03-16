@@ -1,0 +1,22 @@
+1:
+  text: How is the weather today?
+  type: single
+  options:
+    1:
+      text: Sunny
+      targets:
+        cycling: 10
+        surfing: 8
+        running: 5
+    2:
+      text: Windy
+      targets:
+        cycling: 2
+        surfing: 10
+        running: 5
+    4:
+      text: Rainy
+      targets:
+        cycling: 1
+        surfing: 5
+        running: 8
