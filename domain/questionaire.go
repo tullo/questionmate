@@ -5,15 +5,15 @@ import (
 )
 
 type Questionaire struct {
-	Questions map[int]Question
+	Questions map[int]Question // Questions maps Questions by their IDs
 }
 
-func NewQuestionaire(data []byte) Questionaire {
+func NewQuestionaire(data []byte) (Questionaire, error) {
 	q := Questionaire{}
 	q.Questions = make(map[int]Question)
 	err := yaml.Unmarshal(data, &q.Questions)
 	if err != nil {
-		panic(err)
+		return q, err
 	}
-	return q
+	return q, nil
 }

@@ -20,3 +20,20 @@
         cycling: 1
         surfing: 5
         running: 8
+2:
+  text: Do you have a car available?
+  type: single
+  options:
+    1:
+      text: Yes
+      targets:
+        surfing: 10
+    2:
+      text: No
+      targets:
+        cycling: 20
+        running: 20
+  only:
+    # question 2 is only asked when question 1 was answered with "windy"
+    1:
+      option: 2
