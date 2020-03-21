@@ -2,6 +2,7 @@ package domain
 
 import (
 	"fmt"
+	"github.com/rwirdemann/questionmate/yaml"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -13,7 +14,7 @@ func TestNewQuestionaire(t *testing.T) {
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/surf.yaml", os.Getenv("GOPATH"))
 	dat, err := ioutil.ReadFile(fn)
 	assert.Nil(t, err)
-	q, err := NewQuestionaire(dat)
+	q, err := NewQuestionaire(dat, yaml.Consumer{})
 	assert.Nil(t, err)
 	assert.Equal(t, "How is the weather today?", q.Questions[1].Text)
 	assert.Equal(t, "Sunny", q.Questions[1].Options[1].Text)

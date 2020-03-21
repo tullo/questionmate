@@ -1,19 +1,16 @@
 package domain
 
-import (
-	"gopkg.in/yaml.v2"
-)
-
 type Questionaire struct {
 	Questions map[int]Question // Questions maps Questions by their IDs
 }
 
-func NewQuestionaire(data []byte) (Questionaire, error) {
+type consumer interface {
+	Consume(i interface{}, o interface{}) error
+}
+
+func NewQuestionaire(data []byte, c consumer) (Questionaire, error) {
 	q := Questionaire{}
 	q.Questions = make(map[int]Question)
-	err := yaml.Unmarshal(data, &q.Questions)
-	if err != nil {
-		return q, err
-	}
-	return q, nil
+	err := c.Consume(data, &q.Questions)
+	return q, err
 }
