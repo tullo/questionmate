@@ -1,0 +1,80 @@
+targets:
+  1:
+    label: freeride
+  2:
+    label: freestyle
+  3:
+    label: freestyle-wave
+  4:
+    label: wave
+
+questions:
+  1:
+    text: Welches sind die Hauptbedingungen, unter denen du surfst?
+    type: multi
+    options:
+      1:
+        text: Flachwasser Meer
+        scores: 
+          1:
+            value: 10
+            why: Auf dem Meer kannst die lange Schläge fahren
+          2:
+            score: 10
+          3:
+            score: 8
+          4:
+            score: 2
+      2:
+        text: Flachwasser Binnen
+      4:
+        text: Kleine Welle (bis Kofphoch)
+      8:
+        text: Große Klopfer
+  2:
+    text: Wieviele Tage surfst du im Jahr?
+    type: single
+    options:
+      1:
+        text: Weniger als 20
+      2:
+        text: Zwischen 20 und 40
+      4:
+        text: Mehr als 40
+  3:
+    text: Dein Hauptrevier ist Flachwasser. Gehst du trotzdem hin und wieder in die Welle?
+    type: binary
+    options:
+      1:
+        text: ja
+      2:
+        text: nein
+    dependencies: or
+      - 1:1
+      - 1:2
+  4:
+    text: Wann bist du geboren?
+    type: single
+    options:
+      1:
+        text: Vor 1960
+      2:
+        text: Zwischen 1960 und 1980
+      4:
+        text: Zwischen 1980 und 2000
+      8:
+        text: Nach 2000
+  5:
+    text: Wieviel wiegst du?
+    type: single
+    options:
+      1:
+        text: Unter 60 KG
+      2:
+        text: Zwischen 60 und 70 KG
+      4:
+        text: Zwischen 70 und 85 KG
+      8:
+        text: Zwischen 85 und 100 KG
+      16:
+        text: Über 100 KG
