@@ -1,0 +1,48 @@
+10: Schätzen Sie die (betriebswirschadftiche) Bedeutung der Software für Ihr Unternehmen ein?
+type: single
+options:
+  1: sehr wichtig
+  - relevanz: 3
+  2: wichtig
+  - relevanz: 2
+  4: nicht so wichtig
+  scores:
+  - relevanz: 1
+
+15: Wie häufig kommt es zu Betriebsstörungen, ohne dass die Software zuvor geändert wurde?
+type: single
+options:
+  1: seltener als ein mal pro Woche
+  - robustheit: 3
+  2: ein bis fünf mal die Woche?
+  - robustheit: 
+
+20: Welche Programmiersprachen kommen zum Einsatz?
+type: multi
+options:
+    1: modern (z.B. go, Rust, Swift)
+    - zukunftsfähigkeit: 3 
+      * Moderne Programmiersprachen sind ein gutes Invest in die Zukunftsfähigkeit ihrer Software. 
+      * Moderne Programmiersprachen helfen Entwickler zu finden
+    2: standard (z.B. Java, C/C++, JavaScript, Php)
+    scores:
+    - zukunftsfähigkeit: 2
+    4: auslaufend (Cobol, Delphi)
+
+40: Betreiben Sie die Software auf eigenen Servern oder in der Cloud?
+type: single
+options:
+    1: auf eigenen Servern
+    2: Cloud
+    - zukunftsfähigkeit: 3
+      * Mit dem Cloud-Betrieb sind sie bereits fit für die Zukunft
+
+44: Ist ein Umzug in die Cloud geplant?
+type: single
+dependson:
+    40: 1
+options:
+    1: ja
+    - zukunftsfähigkeit: 3
+      * Ein Umzug in die Cloud macht ihre Software zukunftsfähig
+    2: nein    
