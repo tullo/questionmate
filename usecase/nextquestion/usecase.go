@@ -2,12 +2,9 @@ package nextquestion
 
 import "github.com/rwirdemann/questionmate/domain"
 
-type Answer struct {
-}
-
 type UseCase struct {
 }
 
-func (uc UseCase) NextQuestion(answers []Answer) domain.Question {
+func (uc UseCase) NextQuestion(answers []domain.Answer) domain.Question {
 	return domain.Question{}
 }
