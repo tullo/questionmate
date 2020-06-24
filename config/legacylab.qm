@@ -1,13 +1,12 @@
-10: Schätzen Sie die (betriebswirschadftiche) Bedeutung der Software für Ihr Unternehmen ein?
+10: Schätzen Sie relativen Marktwert der Software auf einer Skala zwischen 0 und 100. 
 type: single
 options:
-  1: sehr wichtig
-  - relevanz: 3
-  2: wichtig
-  - relevanz: 2
-  4: nicht so wichtig
-  scores:
-  - relevanz: 1
+  1: 0-30 
+  - geschäftswert: 1
+  2: 30 - 60
+  - geschäftswert: 2
+  4: 60 - 100
+  - geschäftswert: 3
 
 15: Wie häufig kommt es zu Betriebsstörungen, ohne dass die Software zuvor geändert wurde?
 type: single
