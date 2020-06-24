@@ -21,7 +21,6 @@ func TestLoadQuestions(t *testing.T) {
 	q := store.LoadQuestions(data)
 	assert.Equal(t, "freeride", q.Targets[1].Label)
 	assert.Equal(t, "Welches sind die Hauptbedingungen, unter denen du surfst?", q.Questions[1].Text)
-	fmt.Printf("%v", q.Questions[1].Options[1].Scores)
-	assert.Equal(t, 10, q.Questions[1].Options[1].Scores[1].Value)
-	assert.Equal(t, "Auf dem Meer kannst die lange Schläge fahren", q.Questions[1].Options[1].Scores[1].Why)
+	assert.Equal(t, 3, q.Questions[1].Options[1].Scores[1].Value)
+	assert.Equal(t, "Auf dem Meer kannst Du lange Schläge fahren", q.Questions[1].Options[1].Scores[1].Why)
 }
