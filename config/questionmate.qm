@@ -1,0 +1,9 @@
+10: Estimate the proportional market value of you software on a range between 0 and 100.
+type: single
+options:
+  1: 0-30 
+  - businessvalue: 1
+  2: 30 - 60
+  - businessvalue: 2
+  4: 60 - 100
+  - businessvalue: 3

@@ -11,7 +11,7 @@ import (
 )
 
 func TestLoadQuestions(t *testing.T) {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "legacylab.qm")
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate.qm")
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)
@@ -19,5 +19,10 @@ func TestLoadQuestions(t *testing.T) {
 
 	var store QuestionStore
 	q := store.LoadQuestions(data)
-	assert.Equal(t, "Schätzen Sie relativen Marktwert der Software auf einer Skala zwischen 0 und 100", q.Questions[10].Text)
+	assert.Equal(t, "Estimate the proportional market value of you software on a range between 0 and 100.", q.Questions[10].Text)
+}
+
+func Test_isQuestion(t *testing.T) {
+	assert.True(t, isQuestion("10: Estimate the proportional"))
+	assert.False(t, isQuestion("Estimate the proportional"))
 }
