@@ -16,7 +16,7 @@ func NewQuestionStore(filename string) QuestionStore {
 
 func (q QuestionStore) LoadQuestions(data []byte) domain.Questionaire {
 	var questionaire domain.Questionaire
-	questionaire.Questions = make(map[int]domain.Question)
+	questionaire.Questions = make(map[int]*domain.Question)
 	err := yaml.Unmarshal(data, &questionaire)
 	if err != nil {
 		log.Fatal(err)

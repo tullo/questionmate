@@ -20,6 +20,7 @@ func TestLoadQuestions(t *testing.T) {
 	var store QuestionStore
 	q := store.LoadQuestions(data)
 	assert.Equal(t, "Estimate the proportional market value of you software on a range between 0 and 100.", q.Questions[10].Text)
+	assert.Equal(t, "single", q.Questions[10].Type)
 }
 
 func Test_isQuestion(t *testing.T) {

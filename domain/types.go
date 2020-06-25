@@ -26,7 +26,7 @@ type Target struct {
 
 type Questionaire struct {
 	Targets   map[int]Target
-	Questions map[int]Question // Questions maps Questions by their IDs
+	Questions map[int]*Question // Questions maps Questions by their IDs
 }
 
 type Answer struct {
