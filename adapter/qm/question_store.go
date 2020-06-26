@@ -9,11 +9,6 @@ import (
 )
 
 type QuestionStore struct {
-	filename string
-}
-
-func NewQuestionStore(filename string) QuestionStore {
-	return QuestionStore{filename: filename}
 }
 
 func (q QuestionStore) LoadQuestions(data []byte) domain.Questionaire {
@@ -22,23 +17,40 @@ func (q QuestionStore) LoadQuestions(data []byte) domain.Questionaire {
 	lines := strings.Split(string(data), "\n")
 
 	var question *domain.Question
+	var option *domain.Option
 	for _, l := range lines {
-		if question == nil && isQuestion(l) {
+		if isQuestion(l) {
 			q := strings.Split(l, ":")
 			id, err := strconv.Atoi(q[0])
 			if err != nil {
 				log.Fatal(err)
 			}
-			question = &domain.Question{ID: id, Text: strings.Trim(q[1], " ")}
+			question = domain.NewQuestion(id, strings.Trim(q[1], " "))
 			questionaire.Questions[id] = question
 		}
+
 		if question != nil && isType(l) {
 			t := strings.Split(l, ":")
 			question.Type = strings.Trim(t[1], " ")
 		}
+
+		if question != nil && isOption(l) {
+			o := strings.Split(l, ":")
+			id, err := strconv.Atoi(o[0])
+			if err != nil {
+				log.Fatal(err)
+			}
+			option = &domain.Option{ID: id, Text: strings.Trim(o[1], " ")}
+			question.Options[id] = option
+		}
 	}
 
 	return questionaire
+}
+
+func isOption(s string) bool {
+	match, _ := regexp.MatchString("(^ {2}\\d+):", s)
+	return match
 }
 
 func isType(s string) bool {

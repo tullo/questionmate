@@ -21,9 +21,16 @@ func TestLoadQuestions(t *testing.T) {
 	q := store.LoadQuestions(data)
 	assert.Equal(t, "Estimate the proportional market value of you software on a range between 0 and 100.", q.Questions[10].Text)
 	assert.Equal(t, "single", q.Questions[10].Type)
+	assert.Len(t, q.Questions[10].Options, 3)
+	assert.Equal(t, "0 - 30", q.Questions[10].Options[1].Text)
 }
 
 func Test_isQuestion(t *testing.T) {
 	assert.True(t, isQuestion("10: Estimate the proportional"))
 	assert.False(t, isQuestion("Estimate the proportional"))
+}
+
+func Test_isOption(t *testing.T) {
+	assert.True(t, isOption("  1: 0 - 30"))
+	assert.False(t, isOption("1: 0 - 30"))
 }

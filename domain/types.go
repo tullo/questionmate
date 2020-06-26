@@ -4,7 +4,13 @@ type Question struct {
 	ID      int
 	Text    string
 	Type    string
-	Options map[int]Option
+	Options map[int]*Option
+}
+
+func NewQuestion(id int, text string) *Question {
+	q := Question{ID: id, Text: text}
+	q.Options = make(map[int]*Option)
+	return &q
 }
 
 type Option struct {
