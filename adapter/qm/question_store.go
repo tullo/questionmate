@@ -1,11 +1,12 @@
 package qm
 
 import (
-	"github.com/rwirdemann/questionmate/domain"
 	"log"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/rwirdemann/questionmate/domain"
 )
 
 type QuestionStore struct {
@@ -21,10 +22,7 @@ func (q QuestionStore) LoadQuestions(data []byte) domain.Questionaire {
 	for _, l := range lines {
 		if isQuestion(l) {
 			q := strings.Split(l, ":")
-			id, err := strconv.Atoi(q[0])
-			if err != nil {
-				log.Fatal(err)
-			}
+			id := toInt(q[0])
 			question = domain.NewQuestion(id, strings.Trim(q[1], " "))
 			questionaire.Questions[id] = question
 		}
@@ -36,16 +34,21 @@ func (q QuestionStore) LoadQuestions(data []byte) domain.Questionaire {
 
 		if question != nil && isOption(l) {
 			o := strings.Split(l, ":")
-			id, err := strconv.Atoi(o[0])
-			if err != nil {
-				log.Fatal(err)
-			}
+			id := toInt(o[0])
 			option = &domain.Option{ID: id, Text: strings.Trim(o[1], " ")}
 			question.Options[id] = option
 		}
 	}
 
 	return questionaire
+}
+
+func toInt(s string) int {
+	i, err := strconv.Atoi(strings.Trim(s, " "))
+	if err != nil {
+		log.Fatal(err)
+	}
+	return i
 }
 
 func isOption(s string) bool {
