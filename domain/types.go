@@ -1,6 +1,9 @@
 package domain
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 type Question struct {
 	ID      int
@@ -35,6 +38,28 @@ type Questionaire struct {
 	Questions map[int]*Question // Questions maps Questions by their IDs
 }
 
+// Unanswered returns an sorted array of unanswered question ids according to
+// the given answers.
+func (q Questionaire) Unanswered(answers []Answer) []int {
+	var unanswered []int
+	for id, _ := range q.Questions {
+		if !contains(id, answers) {
+			unanswered = append(unanswered, id)
+		}
+	}
+	sort.Ints(unanswered)
+	return unanswered
+}
+
+func contains(id int, answers []Answer) bool {
+	for _, a := range answers {
+		if a.ID == id {
+			return true
+		}
+	}
+	return false
+}
+
 func (q Questionaire) String() string {
 	var s string
 	for _, question := range q.Questions {
@@ -47,4 +72,5 @@ func (q Questionaire) String() string {
 }
 
 type Answer struct {
+	ID int
 }
