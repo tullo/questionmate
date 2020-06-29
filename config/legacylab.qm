@@ -1,47 +1,48 @@
 10: Schätzen Sie den relativen Marktwert der Software auf einer Skala zwischen 0 und 100.
 type: single
 options:
-  1: 0-30 
-  - geschäftswert: 1
+  1: 0 - 30
+  - businessvalue: 1
   2: 30 - 60
-  - geschäftswert: 2
+  - businessvalue: 2
   4: 60 - 100
-  - geschäftswert: 3
+  - businessvalue: 3
 
 15: Wie häufig kommt es zu Betriebsstörungen, ohne dass die Software zuvor geändert wurde?
 type: single
 options:
   1: seltener als ein mal pro Woche
-  - robustheit: 3
-  2: ein bis fünf mal die Woche?
-  - robustheit: 
+  - robustness: 3
+  2: ein bis fünf mal die Woche
+  - robustness:
+  4: mehr als fünf mal die Woche
 
 20: Welche Programmiersprachen kommen zum Einsatz?
 type: multi
 options:
-    1: modern (z.B. go, Rust, Swift)
-    - zukunftsfähigkeit: 3 
-      * Moderne Programmiersprachen sind ein gutes Invest in die Zukunftsfähigkeit ihrer Software. 
-      * Moderne Programmiersprachen helfen Entwickler zu finden
-    2: standard (z.B. Java, C/C++, JavaScript, Php)
-    scores:
-    - zukunftsfähigkeit: 2
-    4: auslaufend (Cobol, Delphi)
+  1: modern (z.B. go, Rust, Swift)
+  - futurability: 3
+    * Moderne Programmiersprachen sind ein gutes Invest in die Zukunft ihrer Software.
+    * Moderne Programmiersprachen helfen Entwickler zu finden
+  2: standard (z.B. Java, C/C++, JavaScript, Php)
+  - futurability: 2
+  4: auslaufend (Cobol, Delphi)
+  - futurability: 1
 
 40: Betreiben Sie die Software auf eigenen Servern oder in der Cloud?
 type: single
 options:
-    1: auf eigenen Servern
-    2: Cloud
-    - zukunftsfähigkeit: 3
-      * Mit dem Cloud-Betrieb sind sie bereits fit für die Zukunft
+  1: auf eigenen Servern
+  2: Cloud
+  - futurability: 3
+    * Mit dem Cloud-Betrieb sind sie bereits fit für die Zukunft
 
 44: Ist ein Umzug in die Cloud geplant?
 type: single
 dependson:
-    40: 1
+  40: 1
 options:
-    1: ja
-    - zukunftsfähigkeit: 3
-      * Ein Umzug in die Cloud macht ihre Software zukunftsfähig
-    2: nein    
+  1: ja
+  - futurability: 3
+    * Ein Umzug in die Cloud macht ihre Software zukunftsfähig
+  2: nein

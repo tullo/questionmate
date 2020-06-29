@@ -7,3 +7,16 @@ options:
   - businessvalue: 2
   4: 60 - 100
   - businessvalue: 3
+
+20: How many features does your team develop per month?
+type: single
+options:
+  1: 1
+  - extendability: 1
+  - businessvalue: 1
+  2: 1 - 5
+  - extendability: 2
+  - businessvalue: 2
+  4: > 5
+  - extendability: 3
+  - businessvalue: 1

@@ -23,6 +23,21 @@ func TestLoadQuestions(t *testing.T) {
 	assert.Equal(t, "single", q.Questions[10].Type)
 	assert.Len(t, q.Questions[10].Options, 3)
 	assert.Equal(t, "0 - 30", q.Questions[10].Options[1].Text)
+
+	// Targets
+	assert.Len(t, q.Questions[10].Options[1].Targets, 1)
+	assert.Equal(t, 1, q.Questions[10].Options[1].Targets["businessvalue"].Value)
+	assert.Equal(t, 2, q.Questions[10].Options[2].Targets["businessvalue"].Value)
+	assert.Equal(t, 3, q.Questions[10].Options[4].Targets["businessvalue"].Value)
+
+	assert.Equal(t, "How many features does your team develop per month?", q.Questions[20].Text)
+	assert.Len(t, q.Questions[20].Options, 3)
+	assert.Equal(t, "1", q.Questions[20].Options[1].Text)
+
+	// Targets
+	assert.Len(t, q.Questions[20].Options[1].Targets, 2)
+	assert.Equal(t, 1, q.Questions[20].Options[1].Targets["extendability"].Value)
+	assert.Equal(t, 1, q.Questions[20].Options[1].Targets["businessvalue"].Value)
 }
 
 func Test_isQuestion(t *testing.T) {
@@ -33,4 +48,12 @@ func Test_isQuestion(t *testing.T) {
 func Test_isOption(t *testing.T) {
 	assert.True(t, isOption("  1: 0 - 30"))
 	assert.False(t, isOption("1: 0 - 30"))
+}
+
+func Test_isTarget(t *testing.T) {
+	assert.True(t, isTarget("  - businessvalue: 1"))
+	assert.False(t, isTarget(" - businessvalue: 1"))
+	assert.False(t, isTarget("  - businessvalue: x"))
+	assert.True(t, isTarget("  - businessvalue: 12"))
+	assert.False(t, isTarget("  - businessvalue 12"))
 }

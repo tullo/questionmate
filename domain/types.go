@@ -1,5 +1,7 @@
 package domain
 
+import "fmt"
+
 type Question struct {
 	ID      int
 	Text    string
@@ -14,25 +16,34 @@ func NewQuestion(id int, text string) *Question {
 }
 
 type Option struct {
-	ID     int
-	Text   string
-	Scores map[int]Score
+	ID      int
+	Text    string
+	Targets map[string]Score
+}
+
+func NewOption(id int, text string) *Option {
+	o := Option{ID: id, Text: text}
+	o.Targets = make(map[string]Score)
+	return &o
 }
 
 type Score struct {
-	Id    int
 	Value int
-	Why   string
-}
-
-type Target struct {
-	ID    int
-	Label string
 }
 
 type Questionaire struct {
-	Targets   map[int]Target
 	Questions map[int]*Question // Questions maps Questions by their IDs
+}
+
+func (q Questionaire) String() string {
+	var s string
+	for _, question := range q.Questions {
+		s = fmt.Sprintf("%sQuestion: %s\n", s, question.Text)
+		for _, option := range question.Options {
+			s = fmt.Sprintf("%s- %s\n", s, option.Text)
+		}
+	}
+	return s
 }
 
 type Answer struct {

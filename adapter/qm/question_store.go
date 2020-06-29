@@ -35,12 +35,24 @@ func (q QuestionStore) LoadQuestions(data []byte) domain.Questionaire {
 		if question != nil && isOption(l) {
 			o := strings.Split(l, ":")
 			id := toInt(o[0])
-			option = &domain.Option{ID: id, Text: strings.Trim(o[1], " ")}
+			option = domain.NewOption(id, strings.Trim(o[1], " "))
 			question.Options[id] = option
+		}
+
+		if option != nil && isTarget(l) {
+			t := strings.Split(l, ":")
+			target := strings.Trim(t[0], " ")
+			value := toInt(t[1])
+			option.Targets[target[2:len(target)]] = domain.Score{Value: value}
 		}
 	}
 
 	return questionaire
+}
+
+func isTarget(s string) bool {
+	match, _ := regexp.MatchString("(^ {2}- [a-z]+): \\d+", s)
+	return match
 }
 
 func toInt(s string) int {
