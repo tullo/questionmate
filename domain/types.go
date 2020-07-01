@@ -38,6 +38,12 @@ type Questionaire struct {
 	Questions map[int]*Question // Questions maps Questions by their IDs
 }
 
+func NewQuestionnaire() Questionaire {
+	q := Questionaire{}
+	q.Questions = make(map[int]*Question)
+	return q
+}
+
 // Unanswered returns an sorted array of unanswered question ids according to
 // the given answers.
 func (q Questionaire) Unanswered(answers []Answer) []int {
