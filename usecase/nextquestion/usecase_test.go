@@ -2,13 +2,14 @@ package nextquestion
 
 import (
 	"fmt"
-	"github.com/rwirdemann/questionmate/adapter/qm"
-	"github.com/rwirdemann/questionmate/domain"
-	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"log"
 	"os"
 	"testing"
+
+	"github.com/rwirdemann/questionmate/adapter/qm"
+	"github.com/rwirdemann/questionmate/domain"
+	"github.com/stretchr/testify/assert"
 )
 
 var usecase UseCase
@@ -26,10 +27,16 @@ func init() {
 
 func TestNextQuestion(t *testing.T) {
 	var answers []domain.Answer
-	q := usecase.NextQuestion(answers)
+	q, found := usecase.NextQuestion(answers)
+	assert.True(t, found)
 	assert.Equal(t, 10, q.ID)
 
 	answers = append(answers, domain.Answer{ID: 10})
-	q = usecase.NextQuestion(answers)
+	q, found = usecase.NextQuestion(answers)
+	assert.True(t, found)
 	assert.Equal(t, 20, q.ID)
+
+	answers = append(answers, domain.Answer{ID: 20})
+	_, found = usecase.NextQuestion(answers)
+	assert.False(t, found)
 }

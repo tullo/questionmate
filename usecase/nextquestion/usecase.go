@@ -16,8 +16,11 @@ func NewUseCase(store ports.QuestionStore, data []byte) UseCase {
 
 // NextQuestion returns the next questions according to the answers the user
 // has given so far.
-func (uc UseCase) NextQuestion(answers []domain.Answer) domain.Question {
+func (uc UseCase) NextQuestion(answers []domain.Answer) (domain.Question, bool) {
 	questionnaire := uc.questionStore.LoadQuestions(uc.data)
 	unanswered := questionnaire.Unanswered(answers)
-	return *questionnaire.Questions[unanswered[0]]
+	if len(unanswered) > 0 {
+		return *questionnaire.Questions[unanswered[0]], true
+	}
+	return domain.Question{}, false
 }
