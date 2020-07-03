@@ -9,13 +9,21 @@ type Question struct {
 	ID      int
 	Text    string
 	Type    string
-	Options map[int]*Option
+	Options []*Option
 }
 
 func NewQuestion(id int, text string) *Question {
 	q := Question{ID: id, Text: text}
-	q.Options = make(map[int]*Option)
 	return &q
+}
+
+func (q Question) GetOption(id int) *Option {
+	for _, option := range q.Options {
+		if option.ID == id {
+			return option
+		}
+	}
+	return nil
 }
 
 type Option struct {
@@ -48,7 +56,7 @@ func NewQuestionnaire() Questionaire {
 // the given answers.
 func (q Questionaire) Unanswered(answers []Answer) []int {
 	var unanswered []int
-	for id, _ := range q.Questions {
+	for id := range q.Questions {
 		if !contains(id, answers) {
 			unanswered = append(unanswered, id)
 		}

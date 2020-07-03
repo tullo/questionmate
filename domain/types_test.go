@@ -11,7 +11,7 @@ func TestUnanswered(t *testing.T) {
 	q.Questions[1] = &Question{ID: 1}
 	q.Questions[2] = &Question{ID: 2}
 
-	answers := []Answer{}
+	var answers []Answer
 	assert.Equal(t, []int{1, 2}, q.Unanswered(answers))
 
 	answers = append(answers, Answer{ID: 1})

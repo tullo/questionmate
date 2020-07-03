@@ -36,14 +36,14 @@ func (q QuestionStore) LoadQuestions(data []byte) domain.Questionaire {
 			o := strings.Split(l, ":")
 			id := toInt(o[0])
 			option = domain.NewOption(id, strings.Trim(o[1], " "))
-			question.Options[id] = option
+			question.Options = append(question.Options, option)
 		}
 
 		if option != nil && isTarget(l) {
 			t := strings.Split(l, ":")
 			target := strings.Trim(t[0], " ")
 			value := toInt(t[1])
-			option.Targets[target[2:len(target)]] = domain.Score{Value: value}
+			option.Targets[target[2:]] = domain.Score{Value: value}
 		}
 	}
 

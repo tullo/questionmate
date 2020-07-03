@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	. "fmt"
 	"github.com/rwirdemann/questionmate/adapter/qm"
 	"github.com/rwirdemann/questionmate/domain"
 	"github.com/rwirdemann/questionmate/usecase/nextquestion"
@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "legacylab.qm")
+	fn := Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "legacylab.qm")
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)
@@ -26,42 +26,35 @@ func main() {
 		var nextQuestion domain.Question
 		nextQuestion, hasNext = uc.NextQuestion(answers)
 		if hasNext {
-			fmt.Printf("%s\n", nextQuestion.Text)
+			Printf("%s\n", nextQuestion.Text)
 			for _, option := range nextQuestion.Options {
-				fmt.Printf("%d: %s\n", option.ID, option.Text)
+				Printf("%d: %s\n", option.ID, option.Text)
 			}
-			fmt.Print("Your answer: ")
+			Print("Your answer: ")
 			var answer string
-			_, err := fmt.Scanln(&answer)
+			_, err := Scanln(&answer)
 			if err != nil {
 				log.Fatal(err)
 			}
 
-			isValidOption := false
-			for !isValidOption {
-				_, isValidOption = validateOption(answer, nextQuestion.Options)
-				if !isValidOption {
-					fmt.Print("Try again: ")
-					_, err := fmt.Scanln(&answer)
-					if err != nil {
-						log.Fatal(err)
+			// loop until the user has selected a valid option
+			var option *domain.Option
+			for option == nil {
+				i, err := strconv.Atoi(answer)
+				if err == nil {
+					option = nextQuestion.GetOption(i)
+					if option == nil {
+						Print("Try again: ")
+						_, _ = Scanln(&answer)
+					} else {
+						a := domain.Answer{ID: nextQuestion.ID}
+						answers = append(answers, a)
 					}
 				} else {
-					a := domain.Answer{ID: nextQuestion.ID}
-					answers = append(answers, a)
+					Print("Try again: ")
+					_, _ = Scanln(&answer)
 				}
 			}
 		}
 	}
-}
-
-func validateOption(s string, options map[int]*domain.Option) (int, bool) {
-	i, err := strconv.Atoi(s)
-	if err != nil {
-		return -1, false
-	}
-	if _, ok := options[i]; ok {
-		return i, true
-	}
-	return -1, false
 }

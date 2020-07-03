@@ -22,22 +22,22 @@ func TestLoadQuestions(t *testing.T) {
 	assert.Equal(t, "Estimate the proportional market value of you software on a range between 0 and 100.", q.Questions[10].Text)
 	assert.Equal(t, "single", q.Questions[10].Type)
 	assert.Len(t, q.Questions[10].Options, 3)
-	assert.Equal(t, "0 - 30", q.Questions[10].Options[1].Text)
+	assert.Equal(t, "0 - 30", q.Questions[10].GetOption(1).Text)
 
 	// Targets
-	assert.Len(t, q.Questions[10].Options[1].Targets, 1)
-	assert.Equal(t, 1, q.Questions[10].Options[1].Targets["businessvalue"].Value)
-	assert.Equal(t, 2, q.Questions[10].Options[2].Targets["businessvalue"].Value)
-	assert.Equal(t, 3, q.Questions[10].Options[4].Targets["businessvalue"].Value)
+	assert.Len(t, q.Questions[10].GetOption(1).Targets, 1)
+	assert.Equal(t, 1, q.Questions[10].GetOption(1).Targets["businessvalue"].Value)
+	assert.Equal(t, 2, q.Questions[10].GetOption(2).Targets["businessvalue"].Value)
+	assert.Equal(t, 3, q.Questions[10].GetOption(4).Targets["businessvalue"].Value)
 
 	assert.Equal(t, "How many features does your team develop per month?", q.Questions[20].Text)
 	assert.Len(t, q.Questions[20].Options, 3)
-	assert.Equal(t, "1", q.Questions[20].Options[1].Text)
+	assert.Equal(t, "1", q.Questions[20].GetOption(1).Text)
 
 	// Targets
 	assert.Len(t, q.Questions[20].Options[1].Targets, 2)
-	assert.Equal(t, 1, q.Questions[20].Options[1].Targets["extendability"].Value)
-	assert.Equal(t, 1, q.Questions[20].Options[1].Targets["businessvalue"].Value)
+	assert.Equal(t, 1, q.Questions[20].GetOption(1).Targets["extendability"].Value)
+	assert.Equal(t, 1, q.Questions[20].GetOption(1).Targets["businessvalue"].Value)
 }
 
 func Test_isQuestion(t *testing.T) {
