@@ -40,7 +40,7 @@ options:
 44: Ist ein Umzug in die Cloud geplant?
 type: single
 dependson:
-  40: 1
+  40 => 1
 options:
   1: ja
   - futurability: 3

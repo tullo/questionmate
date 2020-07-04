@@ -50,6 +50,13 @@ func Test_isOption(t *testing.T) {
 	assert.False(t, isOption("1: 0 - 30"))
 }
 
+func Test_isDependency(t *testing.T) {
+	assert.True(t, isDependency("  40 => 1"))
+	assert.False(t, isDependency("  40 = 1"))
+	assert.False(t, isDependency(" 40 => 1"))
+	assert.False(t, isDependency("  40 => a"))
+}
+
 func Test_isTarget(t *testing.T) {
 	assert.True(t, isTarget("  - businessvalue: 1"))
 	assert.False(t, isTarget(" - businessvalue: 1"))

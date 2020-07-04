@@ -19,6 +19,7 @@ func (q QuestionStore) LoadQuestions(data []byte) domain.Questionaire {
 
 	var question *domain.Question
 	var option *domain.Option
+
 	for _, l := range lines {
 		if isQuestion(l) {
 			q := strings.Split(l, ":")
@@ -74,5 +75,10 @@ func isType(s string) bool {
 
 func isQuestion(s string) bool {
 	match, _ := regexp.MatchString("(^\\d+):", s)
+	return match
+}
+
+func isDependency(s string) bool {
+	match, _ := regexp.MatchString("(^ {2}\\d+) => \\d+", s)
 	return match
 }
