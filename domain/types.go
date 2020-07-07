@@ -7,9 +7,9 @@ import (
 
 type Question struct {
 	ID           int
-	Text         string
+	Text         string `json:"text"`
 	Type         string
-	Options      []*Option
+	Options      []*Option `json:"options"`
 	Dependencies map[int]int
 }
 
@@ -30,7 +30,7 @@ func (q Question) GetOption(id int) *Option {
 
 type Option struct {
 	ID      int
-	Text    string
+	Text    string `json:"text"`
 	Targets map[string]Score
 }
 
