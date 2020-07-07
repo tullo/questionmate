@@ -6,14 +6,16 @@ import (
 )
 
 type Question struct {
-	ID      int
-	Text    string
-	Type    string
-	Options []*Option
+	ID           int
+	Text         string
+	Type         string
+	Options      []*Option
+	Dependencies map[int]int
 }
 
 func NewQuestion(id int, text string) *Question {
 	q := Question{ID: id, Text: text}
+	q.Dependencies = make(map[int]int)
 	return &q
 }
 

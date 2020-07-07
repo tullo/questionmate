@@ -19,7 +19,7 @@ func TestLoadQuestions(t *testing.T) {
 
 	var store QuestionStore
 	q := store.LoadQuestions(data)
-	assert.Equal(t, "Estimate the proportional market value of you software on a range between 0 and 100.", q.Questions[10].Text)
+	assert.Equal(t, "Estimate the proportional market value of your software on a range between 0 and 100.", q.Questions[10].Text)
 	assert.Equal(t, "single", q.Questions[10].Type)
 	assert.Len(t, q.Questions[10].Options, 3)
 	assert.Equal(t, "0 - 30", q.Questions[10].GetOption(1).Text)
@@ -38,6 +38,9 @@ func TestLoadQuestions(t *testing.T) {
 	assert.Len(t, q.Questions[20].Options[1].Targets, 2)
 	assert.Equal(t, 1, q.Questions[20].GetOption(1).Targets["extendability"].Value)
 	assert.Equal(t, 1, q.Questions[20].GetOption(1).Targets["businessvalue"].Value)
+
+	// Dependencies
+	assert.Equal(t, 1, q.Questions[44].Dependencies[40])
 }
 
 func Test_isQuestion(t *testing.T) {

@@ -33,6 +33,13 @@ func (q QuestionStore) LoadQuestions(data []byte) domain.Questionaire {
 			question.Type = strings.Trim(t[1], " ")
 		}
 
+		if question != nil && isDependency(l) {
+			d := strings.Split(l, "=>")
+			questionID := toInt(d[0])
+			optionID := toInt(d[1])
+			question.Dependencies[questionID] = optionID
+		}
+
 		if question != nil && isOption(l) {
 			o := strings.Split(l, ":")
 			id := toInt(o[0])

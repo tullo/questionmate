@@ -37,6 +37,16 @@ func TestNextQuestion(t *testing.T) {
 	assert.Equal(t, 20, q.ID)
 
 	answers = append(answers, domain.Answer{ID: 20})
+	q, found = usecase.NextQuestion(answers)
+	assert.True(t, found)
+	assert.Equal(t, 40, q.ID)
+
+	answers = append(answers, domain.Answer{ID: 40})
+	q, found = usecase.NextQuestion(answers)
+	assert.True(t, found)
+	assert.Equal(t, 44, q.ID)
+
+	answers = append(answers, domain.Answer{ID: 44})
 	_, found = usecase.NextQuestion(answers)
 	assert.False(t, found)
 }
