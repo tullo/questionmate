@@ -47,7 +47,7 @@ func main() {
 						Print("Try again: ")
 						_, _ = Scanln(&answer)
 					} else {
-						a := domain.Answer{ID: nextQuestion.ID}
+						a := domain.Answer{QuestionID: nextQuestion.ID}
 						answers = append(answers, a)
 					}
 				} else {

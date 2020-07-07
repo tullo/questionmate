@@ -6,9 +6,9 @@ import (
 )
 
 type Question struct {
-	ID           int
-	Text         string `json:"text"`
-	Type         string
+	ID           int       `json:"id"`
+	Text         string    `json:"text"`
+	Type         string    `json:"type"`
 	Options      []*Option `json:"options"`
 	Dependencies map[int]int
 }
@@ -69,7 +69,7 @@ func (q Questionaire) Unanswered(answers []Answer) []int {
 
 func contains(id int, answers []Answer) bool {
 	for _, a := range answers {
-		if a.ID == id {
+		if a.QuestionID == id {
 			return true
 		}
 	}
@@ -88,5 +88,5 @@ func (q Questionaire) String() string {
 }
 
 type Answer struct {
-	ID int
+	QuestionID int `json:"question_id"`
 }

@@ -31,22 +31,22 @@ func TestNextQuestion(t *testing.T) {
 	assert.True(t, found)
 	assert.Equal(t, 10, q.ID)
 
-	answers = append(answers, domain.Answer{ID: 10})
+	answers = append(answers, domain.Answer{QuestionID: 10})
 	q, found = usecase.NextQuestion(answers)
 	assert.True(t, found)
 	assert.Equal(t, 20, q.ID)
 
-	answers = append(answers, domain.Answer{ID: 20})
+	answers = append(answers, domain.Answer{QuestionID: 20})
 	q, found = usecase.NextQuestion(answers)
 	assert.True(t, found)
 	assert.Equal(t, 40, q.ID)
 
-	answers = append(answers, domain.Answer{ID: 40})
+	answers = append(answers, domain.Answer{QuestionID: 40})
 	q, found = usecase.NextQuestion(answers)
 	assert.True(t, found)
 	assert.Equal(t, 44, q.ID)
 
-	answers = append(answers, domain.Answer{ID: 44})
+	answers = append(answers, domain.Answer{QuestionID: 44})
 	_, found = usecase.NextQuestion(answers)
 	assert.False(t, found)
 }
