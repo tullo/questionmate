@@ -19,9 +19,9 @@ func NewQuestion(id int, text string) *Question {
 	return &q
 }
 
-func (q Question) GetOption(id int) *Option {
+func (q Question) GetOption(value int) *Option {
 	for _, option := range q.Options {
-		if option.ID == id {
+		if option.Value == value {
 			return option
 		}
 	}
@@ -29,13 +29,13 @@ func (q Question) GetOption(id int) *Option {
 }
 
 type Option struct {
-	ID      int
+	Value   int    `json:"value"`
 	Text    string `json:"text"`
 	Targets map[string]Score
 }
 
-func NewOption(id int, text string) *Option {
-	o := Option{ID: id, Text: text}
+func NewOption(value int, text string) *Option {
+	o := Option{Value: value, Text: text}
 	o.Targets = make(map[string]Score)
 	return &o
 }

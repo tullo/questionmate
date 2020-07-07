@@ -28,7 +28,7 @@ func main() {
 		if hasNext {
 			Printf("%s\n", nextQuestion.Text)
 			for _, option := range nextQuestion.Options {
-				Printf("%d: %s\n", option.ID, option.Text)
+				Printf("%d: %s\n", option.Value, option.Text)
 			}
 			Print("Your answer: ")
 			var answer string
