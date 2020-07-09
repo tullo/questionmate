@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
-	"github.com/rwirdemann/questionmate/adapter/qm"
+	"github.com/rwirdemann/questionmate/adapter/repositories/file"
 	"github.com/rwirdemann/questionmate/domain"
 	"github.com/rwirdemann/questionmate/usecase/nextquestion"
 	"io/ioutil"
@@ -17,12 +17,12 @@ import (
 var nq nextquestion.UseCase
 
 func main() {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "legacylab.qm")
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "legacylab.file")
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)
 	}
-	nq = nextquestion.NewUseCase(qm.QuestionStore{}, data)
+	nq = nextquestion.NewUseCase(file.QuestionRepository{}, data)
 
 	r := mux.NewRouter()
 	r.HandleFunc("/questions", nextQuestionHandler).Methods("POST")

@@ -2,7 +2,7 @@ package main
 
 import (
 	. "fmt"
-	"github.com/rwirdemann/questionmate/adapter/qm"
+	"github.com/rwirdemann/questionmate/adapter/repositories/file"
 	"github.com/rwirdemann/questionmate/domain"
 	"github.com/rwirdemann/questionmate/usecase/nextquestion"
 	"io/ioutil"
@@ -12,13 +12,13 @@ import (
 )
 
 func main() {
-	fn := Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "legacylab.qm")
+	fn := Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "legacylab.file")
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var store qm.QuestionStore
+	var store file.QuestionRepository
 	uc := nextquestion.NewUseCase(store, data)
 	var answers []domain.Answer
 	hasNext := true

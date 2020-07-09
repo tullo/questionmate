@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/rwirdemann/questionmate/adapter/qm"
+	"github.com/rwirdemann/questionmate/adapter/repositories/file"
 	"github.com/rwirdemann/questionmate/domain"
 	"github.com/stretchr/testify/assert"
 )
@@ -21,7 +21,7 @@ func init() {
 		log.Fatal(err)
 	}
 
-	store := qm.QuestionStore{}
+	store := file.QuestionRepository{}
 	usecase = NewUseCase(store, data)
 }
 

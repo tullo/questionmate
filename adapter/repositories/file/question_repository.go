@@ -1,4 +1,4 @@
-package qm
+package file
 
 import (
 	"log"
@@ -9,10 +9,10 @@ import (
 	"github.com/rwirdemann/questionmate/domain"
 )
 
-type QuestionStore struct {
+type QuestionRepository struct {
 }
 
-func (q QuestionStore) LoadQuestions(data []byte) domain.Questionaire {
+func (q QuestionRepository) LoadQuestions(data []byte) domain.Questionaire {
 	var questionaire domain.Questionaire
 	questionaire.Questions = make(map[int]*domain.Question)
 	lines := strings.Split(string(data), "\n")

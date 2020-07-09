@@ -1,4 +1,4 @@
-package qm
+package file
 
 import (
 	"fmt"
@@ -17,7 +17,7 @@ func TestLoadQuestions(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	var store QuestionStore
+	var store QuestionRepository
 	q := store.LoadQuestions(data)
 	assert.Equal(t, "Estimate the proportional market value of your software on a range between 0 and 100.", q.Questions[10].Text)
 	assert.Equal(t, "single", q.Questions[10].Type)
