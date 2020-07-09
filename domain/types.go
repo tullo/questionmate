@@ -90,3 +90,12 @@ func (q Questionaire) String() string {
 type Answer struct {
 	QuestionID int `json:"question_id"`
 }
+
+type Target struct {
+	Text  string `json:"text"`
+	Score int    `json:"score"`
+}
+
+type Evaluation struct {
+	Targets []Target `json:"targets"`
+}
