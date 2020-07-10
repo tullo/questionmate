@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-// todo auf cli adapter umstellen
+// This is an adapter that adapts the next question usecase to the console.
 func main() {
 	uc := usecase.NextQuestion{QuestionRepository: file.NewQuestionRepository("legacylab.qm")}
 	var answers []domain.Answer
