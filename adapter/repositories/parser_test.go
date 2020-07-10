@@ -1,14 +1,24 @@
-package file
+package repositories
 
 import (
+	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func TestLoadQuestions(t *testing.T) {
-	r := NewQuestionRepository("questionmate.qm")
-	q := r.GetQuestions()[0]
+func TestParseQuestions(t *testing.T) {
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate.qm")
+	data, err := ioutil.ReadFile(fn)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	questions := ParseQuestions(data)
+	q := questions[0]
 	assert.Equal(t, "Estimate the proportional market value of your software on a range between 0 and 100.", q.Text)
 	assert.Equal(t, "single", q.Type)
 	assert.Len(t, q.Options, 3)
@@ -20,7 +30,7 @@ func TestLoadQuestions(t *testing.T) {
 	assert.Equal(t, 2, q.GetOption(2).Targets["businessvalue"].Value)
 	assert.Equal(t, 3, q.GetOption(4).Targets["businessvalue"].Value)
 
-	q = r.GetQuestions()[1]
+	q = questions[1]
 	assert.Equal(t, "How many features does your team develop per month?", q.Text)
 	assert.Len(t, q.Options, 3)
 	assert.Equal(t, "1", q.GetOption(1).Text)
@@ -31,7 +41,7 @@ func TestLoadQuestions(t *testing.T) {
 	assert.Equal(t, 1, q.GetOption(1).Targets["businessvalue"].Value)
 
 	// Dependencies
-	q = r.GetQuestions()[3]
+	q = questions[3]
 	assert.Equal(t, 1, q.Dependencies[40])
 }
 
