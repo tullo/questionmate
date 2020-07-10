@@ -1,6 +1,10 @@
 package file
 
 import (
+	"fmt"
+	"io/ioutil"
+	"os"
+
 	"log"
 	"regexp"
 	"strconv"
@@ -10,41 +14,55 @@ import (
 )
 
 type QuestionRepository struct {
+	questions []domain.Question
 }
 
-func (q QuestionRepository) LoadQuestions(data []byte) domain.Questionaire {
-	var questionaire domain.Questionaire
-	questionaire.Questions = make(map[int]*domain.Question)
-	lines := strings.Split(string(data), "\n")
+func NewQuestionRepository(file string) QuestionRepository {
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), file)
+	data, err := ioutil.ReadFile(fn)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	var question *domain.Question
+	r := QuestionRepository{}
+	r.questions = LoadQuestions(data)
+	return r
+}
+
+func (q QuestionRepository) GetQuestions() []domain.Question {
+	return q.questions
+}
+
+// todo parsing des byte streams in parser auslagen
+func LoadQuestions(data []byte) []domain.Question {
+	lines := strings.Split(string(data), "\n")
+	var questions []domain.Question
 	var option *domain.Option
 
 	for _, l := range lines {
 		if isQuestion(l) {
 			q := strings.Split(l, ":")
 			id := toInt(q[0])
-			question = domain.NewQuestion(id, strings.Trim(q[1], " "))
-			questionaire.Questions[id] = question
+			questions = append(questions, domain.NewQuestion(id, strings.Trim(q[1], " ")))
 		}
 
-		if question != nil && isType(l) {
+		if len(questions) > 0 && isType(l) {
 			t := strings.Split(l, ":")
-			question.Type = strings.Trim(t[1], " ")
+			questions[len(questions)-1].Type = strings.Trim(t[1], " ")
 		}
 
-		if question != nil && isDependency(l) {
+		if len(questions) > 0 && isDependency(l) {
 			d := strings.Split(l, "=>")
 			questionID := toInt(d[0])
 			optionID := toInt(d[1])
-			question.Dependencies[questionID] = optionID
+			questions[len(questions)-1].Dependencies[questionID] = optionID
 		}
 
-		if question != nil && isOption(l) {
+		if len(questions) > 0 && isOption(l) {
 			o := strings.Split(l, ":")
 			id := toInt(o[0])
 			option = domain.NewOption(id, strings.Trim(o[1], " "))
-			question.Options = append(question.Options, option)
+			questions[len(questions)-1].Options = append(questions[len(questions)-1].Options, option)
 		}
 
 		if option != nil && isTarget(l) {
@@ -55,7 +73,7 @@ func (q QuestionRepository) LoadQuestions(data []byte) domain.Questionaire {
 		}
 	}
 
-	return questionaire
+	return questions
 }
 
 func isTarget(s string) bool {

@@ -5,6 +5,11 @@ import (
 	"sort"
 )
 
+// Left side port
+type QuestionReader interface {
+	NextQuestion(answers []domain.Answer) (domain.Question, bool)
+}
+
 // Right side port
 type QuestionRepository interface {
 	GetQuestions() []domain.Question

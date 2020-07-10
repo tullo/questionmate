@@ -13,10 +13,10 @@ type Question struct {
 	Dependencies map[int]int
 }
 
-func NewQuestion(id int, text string) *Question {
+func NewQuestion(id int, text string) Question {
 	q := Question{ID: id, Text: text}
 	q.Dependencies = make(map[int]int)
-	return &q
+	return q
 }
 
 func (q Question) GetOption(value int) *Option {
@@ -44,6 +44,7 @@ type Score struct {
 	Value int
 }
 
+// todo delete type Questionaire
 type Questionaire struct {
 	Questions map[int]*Question // Questions maps Questions by their IDs
 }

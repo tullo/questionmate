@@ -6,11 +6,6 @@ import (
 	"testing"
 )
 
-// Left side port
-type QuestionReader interface {
-	NextQuestion(answers []domain.Answer) (domain.Question, bool)
-}
-
 type MockQuestionRepository struct {
 }
 
