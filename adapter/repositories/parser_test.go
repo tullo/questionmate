@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"fmt"
+	"github.com/rwirdemann/questionmate/domain"
 	"io/ioutil"
 	"log"
 	"os"
@@ -22,27 +23,32 @@ func TestParseQuestions(t *testing.T) {
 	assert.Equal(t, "Estimate the proportional market value of your software on a range between 0 and 100.", q.Text)
 	assert.Equal(t, "single", q.Type)
 	assert.Len(t, q.Options, 3)
-	assert.Equal(t, "0 - 30", q.GetOption(1).Text)
+	assert.Equal(t, "0 - 30", GetOption(q, 1).Text)
 
 	// Targets
-	assert.Len(t, q.GetOption(1).Targets, 1)
-	assert.Equal(t, 1, q.GetOption(1).Targets["businessvalue"].Value)
-	assert.Equal(t, 2, q.GetOption(2).Targets["businessvalue"].Value)
-	assert.Equal(t, 3, q.GetOption(4).Targets["businessvalue"].Value)
+	assert.Len(t, GetOption(q, 1).Targets, 1)
+	assert.Equal(t, 1, GetOption(q, 1).Targets["businessvalue"].Value)
+	assert.Equal(t, 2, GetOption(q, 2).Targets["businessvalue"].Value)
+	assert.Equal(t, 3, GetOption(q, 4).Targets["businessvalue"].Value)
 
 	q = questions[1]
 	assert.Equal(t, "How many features does your team develop per month?", q.Text)
 	assert.Len(t, q.Options, 3)
-	assert.Equal(t, "1", q.GetOption(1).Text)
+	assert.Equal(t, "1", GetOption(q, 1).Text)
 
 	// Targets
 	assert.Len(t, q.Options[1].Targets, 2)
-	assert.Equal(t, 1, q.GetOption(1).Targets["extendability"].Value)
-	assert.Equal(t, 1, q.GetOption(1).Targets["businessvalue"].Value)
+	assert.Equal(t, 1, GetOption(q, 1).Targets["extendability"].Value)
+	assert.Equal(t, 1, GetOption(q, 1).Targets["businessvalue"].Value)
 
 	// Dependencies
 	q = questions[3]
 	assert.Equal(t, 1, q.Dependencies[40])
+}
+
+func GetOption(q domain.Question, i int) domain.Option {
+	o, _ := q.GetOption(i)
+	return o
 }
 
 func Test_isQuestion(t *testing.T) {

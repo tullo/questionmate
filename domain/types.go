@@ -3,6 +3,7 @@ package domain
 import (
 	"fmt"
 	"sort"
+	"strconv"
 )
 
 type Question struct {
@@ -19,13 +20,22 @@ func NewQuestion(id int, text string) Question {
 	return q
 }
 
-func (q Question) GetOption(value int) *Option {
+func (q Question) GetOption(value int) (Option, bool) {
 	for _, option := range q.Options {
 		if option.Value == value {
-			return option
+			return *option, true
 		}
 	}
-	return nil
+	return Option{}, false
+}
+
+func (q Question) GetOptionByString(value string) (Option, bool) {
+	i, err := strconv.Atoi(value)
+	if err != nil {
+		return Option{}, false
+	}
+
+	return q.GetOption(i)
 }
 
 type Option struct {
@@ -90,6 +100,7 @@ func (q Questionaire) String() string {
 
 type Answer struct {
 	QuestionID int `json:"question_id"`
+	Value      int
 }
 
 type Target struct {
