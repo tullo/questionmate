@@ -24,6 +24,10 @@ func ParseQuestions(data []byte) []domain.Question {
 			t := strings.Split(l, ":")
 			questions[len(questions)-1].Type = strings.Trim(t[1], " ")
 		}
+		if len(questions) > 0 && isDesc(l) {
+			t := strings.Split(l, ":")
+			questions[len(questions)-1].Desc = strings.Trim(t[1], " ")
+		}
 
 		if len(questions) > 0 && isDependency(l) {
 			d := strings.Split(l, "=>")
@@ -48,6 +52,10 @@ func ParseQuestions(data []byte) []domain.Question {
 	}
 
 	return questions
+}
+
+func isDesc(s string) bool {
+	return strings.HasPrefix(s, "desc:")
 }
 
 func isTarget(s string) bool {

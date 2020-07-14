@@ -22,6 +22,7 @@ func TestParseQuestions(t *testing.T) {
 	q := questions[0]
 	assert.Equal(t, "Estimate the proportional market value of your software on a range between 0 and 100.", q.Text)
 	assert.Equal(t, "single", q.Type)
+	assert.Equal(t, "This is a detailed description of the question that can be requested by clients on demand.", q.Desc)
 	assert.Len(t, q.Options, 3)
 	assert.Equal(t, "0 - 30", GetOption(q, 1).Text)
 

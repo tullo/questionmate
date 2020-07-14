@@ -10,6 +10,7 @@ type Question struct {
 	ID           int       `json:"id"`
 	Text         string    `json:"text"`
 	Type         string    `json:"type"`
+	Desc         string    `json:"desc"`
 	Options      []*Option `json:"options"`
 	Dependencies map[int]int
 }

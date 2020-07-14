@@ -1,5 +1,6 @@
 10: Schätzen Sie den relativen Marktwert der Software auf einer Skala zwischen 0 und 100.
 type: single
+desc: Der relative Marktwert beschreibt, was das System im Vergleich zu den anderen Systemen wert (Kauf oder Verkauf) ist. Angenommen die Summe ihrer gesamten IT-System entspricht einem Marktwert von 100.
 options:
   1: 0 - 30
   - businessvalue: 1
