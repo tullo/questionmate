@@ -1,17 +1,41 @@
 package console
 
 import (
+	"fmt"
 	"github.com/rwirdemann/questionmate/domain"
 	"github.com/rwirdemann/questionmate/usecase"
+	"log"
 )
 
-var reader usecase.QuestionReader
-
-func NewAdapter(questionReader usecase.QuestionReader) func(answer []domain.Answer) (domain.Question, bool) {
-	reader = questionReader
-	return nextQuestion
+type Adapter struct {
+	reader usecase.QuestionReader
 }
 
-func nextQuestion(answers []domain.Answer) (domain.Question, bool) {
-	return reader.NextQuestion(answers)
+func NewAdapter(questionReader usecase.QuestionReader) Adapter {
+	return Adapter{reader: questionReader}
+}
+
+func (a Adapter) Ask(answers []domain.Answer) (domain.Answer, bool) {
+	q, hasNext := a.reader.NextQuestion(answers)
+	if hasNext {
+		fmt.Printf("%s\n", q.Text)
+		for _, option := range q.Options {
+			fmt.Printf("%d: %s\n", option.Value, option.Text)
+		}
+		fmt.Print("Your answer: ")
+		var answer string
+		_, err := fmt.Scanln(&answer)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		option, isValidAnswer := q.GetOptionByString(answer)
+		for !isValidAnswer {
+			fmt.Print("Try again: ")
+			_, _ = fmt.Scanln(&answer)
+			option, isValidAnswer = q.GetOptionByString(answer)
+		}
+		return domain.Answer{QuestionID: q.ID, Value: option.Value}, true
+	}
+	return domain.Answer{}, false
 }
