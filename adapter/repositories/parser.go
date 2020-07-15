@@ -54,6 +54,17 @@ func ParseQuestions(data []byte) []domain.Question {
 	return questions
 }
 
+func ParseDescriptions(data []byte) map[int]string {
+	lines := strings.Split(string(data), "\n")
+	descriptions := make(map[int]string)
+	for _, l := range lines {
+		d := strings.Split(l, ":")
+		questionID := toInt(d[0])
+		descriptions[questionID] = strings.Trim(d[1], " ")
+	}
+	return descriptions
+}
+
 func isDesc(s string) bool {
 	return strings.HasPrefix(s, "desc:")
 }

@@ -9,10 +9,15 @@ import (
 type MockQuestionRepository struct {
 }
 
+func (m MockQuestionRepository) GetDescriptions() map[int]string {
+	return make(map[int]string)
+}
+
 func (m MockQuestionRepository) GetQuestions() []domain.Question {
 	var questions []domain.Question
 	questions = append(questions, domain.Question{ID: 1})
 	questions = append(questions, domain.Question{ID: 2})
+	questions = append(questions, domain.Question{ID: 3})
 	return questions
 }
 
@@ -31,6 +36,22 @@ func TestNextQuestion(t *testing.T) {
 	assert.Equal(t, 2, q.ID)
 
 	answers = append(answers, domain.Answer{QuestionID: 2})
+	q, b = questionReader.NextQuestion(answers)
+	assert.True(t, b)
+	assert.Equal(t, 3, q.ID)
+
+	answers = append(answers, domain.Answer{QuestionID: 3})
 	_, b = questionReader.NextQuestion(answers)
 	assert.False(t, b)
+}
+
+func TestNextQuestionShouldConsiderOrder(t *testing.T) {
+	var questionRepository QuestionRepository = MockQuestionRepository{}
+	var questionReader QuestionReader = NextQuestion{QuestionRepository: questionRepository}
+	var answers []domain.Answer
+
+	answers = append(answers, domain.Answer{QuestionID: 2})
+	q, b := questionReader.NextQuestion(answers)
+	assert.True(t, b)
+	assert.Equal(t, 3, q.ID)
 }

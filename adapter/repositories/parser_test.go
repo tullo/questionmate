@@ -11,6 +11,17 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestParseDescriptions(t *testing.T) {
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate.desc")
+	data, err := ioutil.ReadFile(fn)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	descriptions := ParseDescriptions(data)
+	assert.Equal(t, "This is a detailed description of the question that can be requested by clients on demand.", descriptions[10])
+}
+
 func TestParseQuestions(t *testing.T) {
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate.qm")
 	data, err := ioutil.ReadFile(fn)

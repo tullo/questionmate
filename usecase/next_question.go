@@ -13,6 +13,7 @@ type QuestionReader interface {
 // Right side port
 type QuestionRepository interface {
 	GetQuestions() []domain.Question
+	GetDescriptions() map[int]string
 }
 
 // Hexagon
@@ -24,7 +25,11 @@ func (nc NextQuestion) NextQuestion(answers []domain.Answer) (domain.Question, b
 	questions := nc.QuestionRepository.GetQuestions()
 	unanswered := unanswered(answers, questions)
 	if len(unanswered) > 0 {
-		return byID(unanswered[0], questions), true
+		question := byID(unanswered[0], questions)
+		if desc, ok := nc.QuestionRepository.GetDescriptions()[question.ID]; ok {
+			question.Desc = desc
+		}
+		return question, true
 	}
 	return domain.Question{}, false
 }
