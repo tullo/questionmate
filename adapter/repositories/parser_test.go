@@ -22,6 +22,17 @@ func TestParseDescriptions(t *testing.T) {
 	assert.Equal(t, "This is a detailed description of the question that can be requested by clients on demand.", descriptions[10])
 }
 
+func TestParseTargets(t *testing.T) {
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate.targets")
+	data, err := ioutil.ReadFile(fn)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	targets := ParseTargets(data)
+	assert.Equal(t, "The target businessvalue evaluates a software in terms of its market value for the underlying business.", targets["businessvalue"])
+}
+
 func TestParseQuestions(t *testing.T) {
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate.qm")
 	data, err := ioutil.ReadFile(fn)

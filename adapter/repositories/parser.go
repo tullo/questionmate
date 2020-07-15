@@ -65,6 +65,16 @@ func ParseDescriptions(data []byte) map[int]string {
 	return descriptions
 }
 
+func ParseTargets(data []byte) map[string]string {
+	lines := strings.Split(string(data), "\n")
+	targets := make(map[string]string)
+	for _, l := range lines {
+		t := strings.Split(l, ":")
+		targets[strings.Trim(t[0], " ")] = strings.Trim(t[1], " ")
+	}
+	return targets
+}
+
 func isDesc(s string) bool {
 	return strings.HasPrefix(s, "desc:")
 }

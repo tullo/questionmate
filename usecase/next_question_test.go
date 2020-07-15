@@ -44,14 +44,3 @@ func TestNextQuestion(t *testing.T) {
 	_, b = questionReader.NextQuestion(answers)
 	assert.False(t, b)
 }
-
-func TestNextQuestionShouldConsiderOrder(t *testing.T) {
-	var questionRepository QuestionRepository = MockQuestionRepository{}
-	var questionReader QuestionReader = NextQuestion{QuestionRepository: questionRepository}
-	var answers []domain.Answer
-
-	answers = append(answers, domain.Answer{QuestionID: 2})
-	q, b := questionReader.NextQuestion(answers)
-	assert.True(t, b)
-	assert.Equal(t, 3, q.ID)
-}

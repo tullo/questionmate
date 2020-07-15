@@ -16,7 +16,7 @@ type QuestionRepository struct {
 }
 
 func NewQuestionRepository(file string) QuestionRepository {
-	questions := repositories.ParseQuestions(readFile(file + ".qm"))
+	questions := repositories.ParseQuestions(readFile(file + ".questions"))
 	descriptions := repositories.ParseDescriptions(readFile(file + ".desc"))
 	return QuestionRepository{Questions: questions, Descriptions: descriptions}
 }
