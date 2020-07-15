@@ -13,12 +13,14 @@ import (
 type QuestionRepository struct {
 	Questions    []domain.Question
 	Descriptions map[int]string
+	Targets      map[string]string
 }
 
 func NewQuestionRepository(file string) QuestionRepository {
 	questions := repositories.ParseQuestions(readFile(file + ".questions"))
 	descriptions := repositories.ParseDescriptions(readFile(file + ".desc"))
-	return QuestionRepository{Questions: questions, Descriptions: descriptions}
+	targets := repositories.ParseTargets(readFile(file + ".targets"))
+	return QuestionRepository{Questions: questions, Descriptions: descriptions, Targets: targets}
 }
 
 func readFile(file string) []byte {
