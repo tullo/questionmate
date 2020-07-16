@@ -17,19 +17,30 @@ type QuestionRepository struct {
 }
 
 func NewQuestionRepository(file string) QuestionRepository {
-	questions := repositories.ParseQuestions(readFile(file + ".questions"))
-	descriptions := repositories.ParseDescriptions(readFile(file + ".desc"))
-	targets := repositories.ParseTargets(readFile(file + ".targets"))
+	var questions []domain.Question
+	var descriptions map[int]string
+	var targets map[string]string
+
+	if bytes, ok := readFile(file + ".questions"); ok {
+		questions = repositories.ParseQuestions(bytes)
+	}
+	if bytes, ok := readFile(file + ".desc"); ok {
+		descriptions = repositories.ParseDescriptions(bytes)
+	}
+	if bytes, ok := readFile(file + ".targets"); ok {
+		targets = repositories.ParseTargets(bytes)
+	}
 	return QuestionRepository{Questions: questions, Descriptions: descriptions, Targets: targets}
 }
 
-func readFile(file string) []byte {
+func readFile(file string) ([]byte, bool) {
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), file)
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return nil, false
 	}
-	return data
+	return data, true
 }
 
 func (q QuestionRepository) GetQuestions() []domain.Question {

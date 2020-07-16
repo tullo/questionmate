@@ -12,7 +12,7 @@ import (
 
 func main() {
 	// 1. Instantiate the "I need to go out httpadapter"
-	repositoryAdapter := file.NewQuestionRepository("legacylab")
+	repositoryAdapter := file.NewQuestionRepository("legacylab-short")
 
 	// 2. Instantiate the hexagon
 	hexagon := usecase.NextQuestion{QuestionRepository: repositoryAdapter}
