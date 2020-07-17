@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	httpadapter "github.com/rwirdemann/questionmate/adapter/driver/http"
@@ -8,11 +10,16 @@ import (
 	"github.com/rwirdemann/questionmate/usecase"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/legacylab-short", os.Getenv("GOPATH"))
+	filenamePtr := flag.String("filename", fn, "the questions file")
+	flag.Parse()
+
 	// 1. Instantiate the "I need to go out httpadapter"
-	repositoryAdapter := file.NewQuestionRepository("legacylab-short")
+	repositoryAdapter := file.NewQuestionRepository(*filenamePtr)
 
 	// 2. Instantiate the hexagon
 	hexagon := usecase.NextQuestion{QuestionRepository: repositoryAdapter}

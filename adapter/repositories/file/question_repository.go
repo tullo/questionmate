@@ -3,10 +3,8 @@ package file
 import (
 	"fmt"
 	"github.com/rwirdemann/questionmate/adapter/repositories"
-	"io/ioutil"
-	"os"
-
 	"github.com/rwirdemann/questionmate/domain"
+	"io/ioutil"
 	"log"
 )
 
@@ -34,8 +32,7 @@ func NewQuestionRepository(file string) QuestionRepository {
 }
 
 func readFile(file string) ([]byte, bool) {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), file)
-	data, err := ioutil.ReadFile(fn)
+	data, err := ioutil.ReadFile(file)
 	if err != nil {
 		log.Println(err)
 		return nil, false
