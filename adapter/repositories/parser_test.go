@@ -34,7 +34,7 @@ func TestParseTargets(t *testing.T) {
 }
 
 func TestParseQuestions(t *testing.T) {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate.qm")
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate.questions")
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)

@@ -4,7 +4,6 @@ import (
 	"strconv"
 )
 
-// todo add number remaining questions
 type Question struct {
 	ID           int       `json:"id"`
 	Text         string    `json:"text"`
@@ -65,5 +64,14 @@ type Target struct {
 }
 
 type Evaluation struct {
-	Targets []Target `json:"targets"`
+	Targets []*Target `json:"targets"`
+}
+
+func (e Evaluation) GetTarget(s string) (*Target, bool) {
+	for _, t := range e.Targets {
+		if t.Text == s {
+			return t, true
+		}
+	}
+	return nil, false
 }

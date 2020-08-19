@@ -11,14 +11,14 @@ type QuestionReader interface {
 }
 
 // Right side port
-type QuestionRepository interface {
+type questionRepository interface {
 	GetQuestions() []domain.Question
 	GetDescriptions() map[int]string
 }
 
 // Hexagon
 type NextQuestion struct {
-	QuestionRepository QuestionRepository
+	QuestionRepository questionRepository
 }
 
 func (nc NextQuestion) NextQuestion(answers []domain.Answer) (domain.Question, bool) {
