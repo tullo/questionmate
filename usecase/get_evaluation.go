@@ -2,11 +2,11 @@ package usecase
 
 import "github.com/rwirdemann/questionmate/domain"
 
-type GetEvaluation struct {
+type Evaluator struct {
 	QuestionRepository questionRepository
 }
 
-func (e GetEvaluation) Process(answers []domain.Answer) domain.Evaluation {
+func (e Evaluator) GetEvaluation(answers []domain.Answer) domain.Evaluation {
 	questions := e.QuestionRepository.GetQuestions()
 	evaluation := domain.Evaluation{}
 	for _, answer := range answers {

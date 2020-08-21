@@ -14,18 +14,18 @@ type QuestionRepository struct {
 	Targets      map[string]string
 }
 
-func NewQuestionRepository(file string) QuestionRepository {
+func NewQuestionRepository(path string) QuestionRepository {
 	var questions []domain.Question
 	var descriptions map[int]string
 	var targets map[string]string
 
-	if bytes, ok := readFile(file + ".questions"); ok {
+	if bytes, ok := readFile(path + "/questions.qm"); ok {
 		questions = repositories.ParseQuestions(bytes)
 	}
-	if bytes, ok := readFile(file + ".desc"); ok {
+	if bytes, ok := readFile(path + "/descriptions.qm"); ok {
 		descriptions = repositories.ParseDescriptions(bytes)
 	}
-	if bytes, ok := readFile(file + ".targets"); ok {
+	if bytes, ok := readFile(path + "/targets.qm"); ok {
 		targets = repositories.ParseTargets(bytes)
 	}
 	return QuestionRepository{Questions: questions, Descriptions: descriptions, Targets: targets}
@@ -58,6 +58,9 @@ func (q QuestionRepository) String() string {
 		}
 		for _, option := range question.Options {
 			s = fmt.Sprintf("%s- %s\n", s, option.Text)
+			for k, v := range option.Targets {
+				s = fmt.Sprintf("%s  - %s: %d\n", s, k, v.Value)
+			}
 		}
 	}
 	return s

@@ -4,6 +4,7 @@ desc: This is a detailed description of the question that can be requested by cl
 options:
   1: 0 - 30
   - businessvalue: 1
+  - änderbarkeit: 2
   2: 30 - 60
   - businessvalue: 2
   4: 60 - 100

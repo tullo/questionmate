@@ -80,7 +80,7 @@ func isDesc(s string) bool {
 }
 
 func isTarget(s string) bool {
-	match, _ := regexp.MatchString("(^ {2}- [a-z]+): \\d+", s)
+	match, _ := regexp.MatchString("(^ {2}- [a-zäÄöÖüÜß]+): \\d+", s)
 	return match
 }
 

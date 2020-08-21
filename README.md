@@ -8,12 +8,10 @@ type: multi
 options:
     1: modern (e.g. Go, Rust, Swift)
     - sustainability: 3 
-      * usage of modern programming languages makes your system future proofed 
-      * usage of modern programming attracts developers
     2: standard (e.g. Java, C/C++, JavaScript, PHP)
     - sustainability: 2
     4: expiring (Cobol, Delphi)
-    - sustainability: 2
+    - sustainability: 1
 ```
 
 A question consists of its id (1), it's text, a type (single or multi) and a list of options (modern, ...). An option can have one or more targets (sustainability) associated with a credit value (3). A target is followed by a list of statements that explain why a selected option impacts the associated target.

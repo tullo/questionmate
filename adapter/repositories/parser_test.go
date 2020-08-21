@@ -12,7 +12,7 @@ import (
 )
 
 func TestParseDescriptions(t *testing.T) {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate.desc")
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate/descriptions.qm")
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)
@@ -23,7 +23,7 @@ func TestParseDescriptions(t *testing.T) {
 }
 
 func TestParseTargets(t *testing.T) {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate.targets")
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate/targets.qm")
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)
@@ -34,7 +34,7 @@ func TestParseTargets(t *testing.T) {
 }
 
 func TestParseQuestions(t *testing.T) {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate.questions")
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate/questions.qm")
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)
@@ -49,8 +49,9 @@ func TestParseQuestions(t *testing.T) {
 	assert.Equal(t, "0 - 30", GetOption(q, 1).Text)
 
 	// Targets
-	assert.Len(t, GetOption(q, 1).Targets, 1)
+	assert.Len(t, GetOption(q, 1).Targets, 2)
 	assert.Equal(t, 1, GetOption(q, 1).Targets["businessvalue"].Value)
+	assert.Equal(t, 2, GetOption(q, 1).Targets["änderbarkeit"].Value)
 	assert.Equal(t, 2, GetOption(q, 2).Targets["businessvalue"].Value)
 	assert.Equal(t, 3, GetOption(q, 4).Targets["businessvalue"].Value)
 

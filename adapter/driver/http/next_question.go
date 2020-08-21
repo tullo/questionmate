@@ -46,24 +46,3 @@ func MakeNextQuestionHandler(questionReader usecase.QuestionReader) http.Handler
 		}
 	}
 }
-
-func MakeEvaluationsHandler() http.HandlerFunc {
-	return func(writer http.ResponseWriter, _ *http.Request) {
-		evaluation := domain.Evaluation{}
-		evaluation.Targets = append(evaluation.Targets, &domain.Target{Text: "changeability", Score: 12})
-		evaluation.Targets = append(evaluation.Targets, &domain.Target{Text: "extendability", Score: 8})
-		evaluation.Targets = append(evaluation.Targets, &domain.Target{Text: "robustness", Score: 3})
-		data, err := json.Marshal(evaluation)
-		if err != nil {
-			log.Printf("error: %s", err)
-			writer.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-		_, err = writer.Write(data)
-		if err != nil {
-			log.Printf("error: %s", err)
-			writer.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-	}
-}

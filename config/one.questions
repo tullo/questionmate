@@ -1,9 +1,0 @@
-10: Schätzen Sie den relativen Marktwert der Software auf einer Skala zwischen 0 und 100.
-type: single
-options:
-  1: 0 - 30
-  - businessvalue: 1
-  2: 30 - 60
-  - businessvalue: 2
-  4: 60 - 100
-  - businessvalue: 3

@@ -14,22 +14,24 @@ import (
 )
 
 func main() {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/legacylab-short", os.Getenv("GOPATH"))
-	filenamePtr := flag.String("filename", fn, "the questions file")
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/legacylab", os.Getenv("GOPATH"))
+	directoryPtr := flag.String("directory", fn, "the questions directory")
 	flag.Parse()
 
 	// 1. Instantiate the "I need to go out httpadapter"
-	repositoryAdapter := file.NewQuestionRepository(*filenamePtr)
+	repositoryAdapter := file.NewQuestionRepository(*directoryPtr)
 
-	// 2. Instantiate the hexagon
+	// 2. Instantiate the hexagons
 	hexagon := usecase.NextQuestion{QuestionRepository: repositoryAdapter}
+	evaluator := usecase.Evaluator{QuestionRepository: repositoryAdapter}
 
 	// 3. Instantiate the "I need to go in adapter"
-	httpAdapter := httpadapter.MakeNextQuestionHandler(hexagon)
+	nextQuestoionHttpAdapter := httpadapter.MakeNextQuestionHandler(hexagon)
+	evaluatorHttpAdapter := httpadapter.MakeEvaluationsHandler(evaluator)
 
 	r := mux.NewRouter()
-	r.HandleFunc("/questions", httpAdapter).Methods("POST")
-	r.HandleFunc("/evaluations", httpadapter.MakeEvaluationsHandler()).Methods("POST")
+	r.HandleFunc("/questions", nextQuestoionHttpAdapter).Methods("POST")
+	r.HandleFunc("/evaluations", evaluatorHttpAdapter).Methods("POST")
 	log.Printf("Service listening on http://localhost:8080...")
 	handler := cors.AllowAll().Handler(r)
 	_ = http.ListenAndServe(":8080", handler)

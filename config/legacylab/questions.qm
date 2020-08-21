@@ -1,0 +1,51 @@
+1: Schätzen Sie den relativen Geschäftswert des Softwaresystems auf einer Skala zwischen 0 und 100 ein.
+type: single
+options:
+  1: 0 - 30
+  - stellenwert: 1
+  2: 30 - 60
+  - stellenwert: 5
+  4: 60 - 100
+  - stellenwert: 10
+
+2: Wie häufig kommt es zu Betriebsstörungen, ohne dass die Software zuvor geändert wurde?
+type: single
+options:
+  1: so gut wie nie
+  - robustheit: 10
+  2: einmal pro Woche
+  - robustheit: 5
+  4: fast täglich
+  - robustheit: 1
+
+3: Wie lange dauert es, einen einfachen Bugfix in Produktion zu bringen, wenn der eigentliche Codefix 30 Minuten dauert?
+type: single
+options:
+  1: weniger als eine Stunde
+  - änderbarkeit: 10
+  2: einen halben Tag
+  - änderbarkeit: 5
+  4: länger als einen Tag
+  - änderbarkeit: 1
+
+4: Wie viele neue Features gehen pro Monat live?
+type: single
+options:
+  1: mehr als fünf
+  - erweiterbarkeit: 10
+  2: zwei bis fünf
+  - erweiterbarkeit: 5
+  4: wenn es gut läuft eins
+  - erweiterbarkeit: 2
+  8: ich kann mich nicht an das letzte neue Feature erinnern
+  - erweiterbarkeit: 0
+
+5: Welche Programmiersprachen kommen zum Einsatz?
+type: single
+options:
+  1: modern (z.B. go, Rust, Swift)
+  - zukunftsfähigkeit: 10
+  2: standard (z.B. Java, C/C++, JavaScript, Php)
+  - zukunftsfähigkeit: 5
+  4: auslaufend (Cobol, Delphi)
+  - zukunftsfähigkeit: 1
