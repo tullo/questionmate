@@ -15,12 +15,12 @@ import (
 )
 
 func main() {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/legacylab", os.Getenv("GOPATH"))
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/coma", os.Getenv("GOPATH"))
 	directoryPtr := flag.String("directory", fn, "the questions directory")
 	flag.Parse()
 
 	// 1. Instantiate the "I need to go out httpadapter"
-	repositoryAdapter := file.NewQuestionRepository(*directoryPtr, parser.QMParser{})
+	repositoryAdapter := file.NewQuestionRepository(*directoryPtr, parser.YAMLParser{})
 
 	// 2. Instantiate the hexagons
 	hexagon := usecase.NextQuestion{QuestionRepository: repositoryAdapter}

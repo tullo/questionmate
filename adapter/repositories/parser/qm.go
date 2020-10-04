@@ -11,6 +11,10 @@ import (
 type QMParser struct {
 }
 
+func (p QMParser) Suffix() string {
+	return "qm"
+}
+
 func (p QMParser) ParseTargets(data []byte) map[string]string {
 	lines := strings.Split(string(data), "\n")
 	targets := make(map[string]string)

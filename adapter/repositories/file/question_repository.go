@@ -19,13 +19,13 @@ func NewQuestionRepository(path string, parser parser.Parser) QuestionRepository
 	var descriptions map[int]string
 	var targets map[string]string
 
-	if bytes, ok := readFile(path + "/questions.qm"); ok {
+	if bytes, ok := readFile(path + "/questions." + parser.Suffix()); ok {
 		questions = parser.ParseQuestions(bytes)
 	}
-	if bytes, ok := readFile(path + "/descriptions.qm"); ok {
+	if bytes, ok := readFile(path + "/descriptions." + parser.Suffix()); ok {
 		descriptions = parser.ParseDescriptions(bytes)
 	}
-	if bytes, ok := readFile(path + "/targets.qm"); ok {
+	if bytes, ok := readFile(path + "/targets" + parser.Suffix()); ok {
 		targets = parser.ParseTargets(bytes)
 	}
 	return QuestionRepository{Questions: questions, Descriptions: descriptions, Targets: targets}
