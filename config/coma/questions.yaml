@@ -1,0 +1,50 @@
+questions:
+  - id: 1
+    text: Die aktuellen Sourcen sind...
+    type: single
+    options:
+      - value: 1
+        text: vollständig vorhanden und übersetzbar
+        targets:
+          - bewertung: 2
+      - value: 2
+        text: unvollständig / nicht übersetzbar
+        targets:
+          - bewertung: 1
+      - value: 4
+        text: nicht vorhanden
+        targets:
+          - bewertung: 0
+  - id: 2
+    text: Wer hat Zugriff auf den Server?
+    type: single
+    options:
+      - value: 1
+        text: Die Entwickler
+        targets:
+          - bewertung: 2
+      - value: 2
+        text: Der Administrator
+        targets:
+          - bewertung: 1
+      - value: 4
+        text: Keiner
+        targets:
+          - bewertung: 0
+  - id: 3
+    text: Sind die Entwickler der Anwendung greifbar?
+    type: single
+    options:
+      - value: 1
+        text: Ja, die Entwickler sind Teil des aktuellen Projektteams
+        targets:
+          - bewertung: 2
+      - value: 2
+        text: Ja, wir haben Zugriff auf die Entwickler
+        targets:
+          - bewertung: 1
+      - value: 4
+        text: Nein, die Entwickler sind nicht mehr greifbar
+        targets:
+          - bewertung: 0
+

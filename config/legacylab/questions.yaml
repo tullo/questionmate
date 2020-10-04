@@ -1,0 +1,17 @@
+questions:
+  - id: 1
+    text: Estimate the relative business value of the target system on a scale between 0 and 100.
+    type: single
+    options:
+      - value: 1
+        text: 0 - 30
+        targets:
+          - importance: 1
+      - value: 2
+        text: 30 - 60
+        targets:
+          - importance: 5
+      - value: 4
+        text: 60 - 100
+        targets:
+          - importance: 10

@@ -1,4 +1,4 @@
-package repositories
+package parser
 
 import (
 	"github.com/rwirdemann/questionmate/domain"
@@ -8,7 +8,31 @@ import (
 	"strings"
 )
 
-func ParseQuestions(data []byte) []domain.Question {
+type QMParser struct {
+}
+
+func (p QMParser) ParseTargets(data []byte) map[string]string {
+	lines := strings.Split(string(data), "\n")
+	targets := make(map[string]string)
+	for _, l := range lines {
+		t := strings.Split(l, ":")
+		targets[strings.Trim(t[0], " ")] = strings.Trim(t[1], " ")
+	}
+	return targets
+}
+
+func (p QMParser) ParseDescriptions(data []byte) map[int]string {
+	lines := strings.Split(string(data), "\n")
+	descriptions := make(map[int]string)
+	for _, l := range lines {
+		d := strings.Split(l, ":")
+		questionID := toInt(d[0])
+		descriptions[questionID] = strings.Trim(d[1], " ")
+	}
+	return descriptions
+}
+
+func (p QMParser) ParseQuestions(data []byte) []domain.Question {
 	lines := strings.Split(string(data), "\n")
 	var questions []domain.Question
 	var option *domain.Option
@@ -52,27 +76,6 @@ func ParseQuestions(data []byte) []domain.Question {
 	}
 
 	return questions
-}
-
-func ParseDescriptions(data []byte) map[int]string {
-	lines := strings.Split(string(data), "\n")
-	descriptions := make(map[int]string)
-	for _, l := range lines {
-		d := strings.Split(l, ":")
-		questionID := toInt(d[0])
-		descriptions[questionID] = strings.Trim(d[1], " ")
-	}
-	return descriptions
-}
-
-func ParseTargets(data []byte) map[string]string {
-	lines := strings.Split(string(data), "\n")
-	targets := make(map[string]string)
-	for _, l := range lines {
-		t := strings.Split(l, ":")
-		targets[strings.Trim(t[0], " ")] = strings.Trim(t[1], " ")
-	}
-	return targets
 }
 
 func isDesc(s string) bool {

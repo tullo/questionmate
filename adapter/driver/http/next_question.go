@@ -35,6 +35,7 @@ func MakeNextQuestionHandler(questionReader usecase.QuestionReader) http.Handler
 				writer.WriteHeader(http.StatusInternalServerError)
 				return
 			}
+			writer.Header().Set("Content-Type", "application/json")
 			_, err = writer.Write(data)
 			if err != nil {
 				log.Printf("error: %s", err)

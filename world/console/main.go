@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/rwirdemann/questionmate/adapter/driver/console"
 	"github.com/rwirdemann/questionmate/adapter/repositories/file"
+	"github.com/rwirdemann/questionmate/adapter/repositories/parser"
 	"github.com/rwirdemann/questionmate/domain"
 	"github.com/rwirdemann/questionmate/usecase"
 	"os"
@@ -12,7 +13,7 @@ import (
 func main() {
 	// 1. Instantiate the "I need to go out httpadapter"
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/legacylab-short", os.Getenv("GOPATH"))
-	repositoryAdapter := file.NewQuestionRepository(fn)
+	repositoryAdapter := file.NewQuestionRepository(fn, parser.QMParser{})
 
 	// 2. Instantiate the hexagon
 	hexagon := usecase.NextQuestion{QuestionRepository: repositoryAdapter}

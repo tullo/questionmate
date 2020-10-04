@@ -1,4 +1,4 @@
-package repositories
+package parser
 
 import (
 	"fmt"
@@ -11,6 +11,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+var parser QMParser
+
 func TestParseDescriptions(t *testing.T) {
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate/descriptions.qm")
 	data, err := ioutil.ReadFile(fn)
@@ -18,7 +20,7 @@ func TestParseDescriptions(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	descriptions := ParseDescriptions(data)
+	descriptions := parser.ParseDescriptions(data)
 	assert.Equal(t, "This is a detailed description of the question that can be requested by clients on demand.", descriptions[10])
 }
 
@@ -29,7 +31,7 @@ func TestParseTargets(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	targets := ParseTargets(data)
+	targets := parser.ParseTargets(data)
 	assert.Equal(t, "The target businessvalue evaluates a software in terms of its market value for the underlying business.", targets["businessvalue"])
 }
 
@@ -40,7 +42,7 @@ func TestParseQuestions(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	questions := ParseQuestions(data)
+	questions := parser.ParseQuestions(data)
 	q := questions[0]
 	assert.Equal(t, "Estimate the proportional market value of your software on a range between 0 and 100.", q.Text)
 	assert.Equal(t, "single", q.Type)

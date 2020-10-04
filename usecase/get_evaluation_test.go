@@ -1,9 +1,10 @@
 package usecase
 
 import (
+	"testing"
+
 	"github.com/rwirdemann/questionmate/domain"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestProcess(t *testing.T) {

@@ -38,9 +38,9 @@ func (q Question) GetOptionByString(value string) (Option, bool) {
 }
 
 type Option struct {
-	Value   int    `json:"value"`
-	Text    string `json:"text"`
-	Targets map[string]Score
+	Value   int              `json:"value"`
+	Text    string           `json:"text"`
+	Targets map[string]Score `json:"targets"`
 }
 
 func NewOption(value int, text string) *Option {
@@ -55,7 +55,7 @@ type Score struct {
 
 type Answer struct {
 	QuestionID int `json:"question_id"`
-	Value      int
+	Value      int `json:"value"`
 }
 
 type Target struct {

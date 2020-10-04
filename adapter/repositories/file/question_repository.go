@@ -2,7 +2,7 @@ package file
 
 import (
 	"fmt"
-	"github.com/rwirdemann/questionmate/adapter/repositories"
+	"github.com/rwirdemann/questionmate/adapter/repositories/parser"
 	"github.com/rwirdemann/questionmate/domain"
 	"io/ioutil"
 	"log"
@@ -14,19 +14,19 @@ type QuestionRepository struct {
 	Targets      map[string]string
 }
 
-func NewQuestionRepository(path string) QuestionRepository {
+func NewQuestionRepository(path string, parser parser.Parser) QuestionRepository {
 	var questions []domain.Question
 	var descriptions map[int]string
 	var targets map[string]string
 
 	if bytes, ok := readFile(path + "/questions.qm"); ok {
-		questions = repositories.ParseQuestions(bytes)
+		questions = parser.ParseQuestions(bytes)
 	}
 	if bytes, ok := readFile(path + "/descriptions.qm"); ok {
-		descriptions = repositories.ParseDescriptions(bytes)
+		descriptions = parser.ParseDescriptions(bytes)
 	}
 	if bytes, ok := readFile(path + "/targets.qm"); ok {
-		targets = repositories.ParseTargets(bytes)
+		targets = parser.ParseTargets(bytes)
 	}
 	return QuestionRepository{Questions: questions, Descriptions: descriptions, Targets: targets}
 }
