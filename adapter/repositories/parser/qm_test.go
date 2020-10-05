@@ -13,17 +13,6 @@ import (
 
 var parser QMParser
 
-func TestParseDescriptions(t *testing.T) {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate/descriptions.qm")
-	data, err := ioutil.ReadFile(fn)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	descriptions := parser.ParseDescriptions(data)
-	assert.Equal(t, "This is a detailed description of the question that can be requested by clients on demand.", descriptions[10])
-}
-
 func TestParseQuestions(t *testing.T) {
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate/questions.qm")
 	data, err := ioutil.ReadFile(fn)
