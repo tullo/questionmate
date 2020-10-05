@@ -23,5 +23,5 @@ func TestParseYAMLQuestions(t *testing.T) {
 	assert.Equal(t, "Die aktuellen Sourcen sind...", questions[0].Text)
 	assert.Equal(t, 1, questions[0].Options[0].Value)
 	assert.Equal(t, "vollständig vorhanden und übersetzbar", questions[0].Options[0].Text)
-	assert.Equal(t, 2, questions[0].Options[0].Targets["bewertung"].Value)
+	assert.Equal(t, 2, questions[0].Options[0].Targets["fitness"].Value)
 }

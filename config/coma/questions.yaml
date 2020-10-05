@@ -6,17 +6,17 @@ questions:
       - value: 1
         text: vollständig vorhanden und übersetzbar
         targets:
-          - name: bewertung
+          - name: fitness
             score: 2
       - value: 2
         text: unvollständig / nicht übersetzbar
         targets:
-          - name: bewertung
+          - name: fitness
             score: 1
       - value: 4
         text: nicht vorhanden
         targets:
-          - name: bewertung
+          - name: fitness
             score: 0
   - id: 2
     text: Wer hat Zugriff auf den Server?
@@ -25,17 +25,17 @@ questions:
       - value: 1
         text: der Administrator
         targets:
-          - name: bewertung
+          - name: fitness
             score: 2
       - value: 2
         text: die Entwickler
         targets:
-          - name: bewertung
+          - name: fitness
             score: 1
       - value: 4
         text: keiner
         targets:
-          - name: bewertung
+          - name: fitness
             score: 0
   - id: 3
     text: Die Entwickler der Anwendung sind...
@@ -44,17 +44,17 @@ questions:
       - value: 1
         text: immer noch Teil des aktuellen Projektteams
         targets:
-          - name: bewertung
+          - name: fitness
             score: 2
       - value: 2
         text: nicht mehr Teil des Teams, aber weiterhin im Zugriff
         targets:
-          - name: bewertung
+          - name: fitness
             score: 1
       - value: 4
         text: nicht mehr im Zugriff
         targets:
-          - name: bewertung
+          - name: fitness
             score: 0
   - id: 4
     text: Die Server laufen auf...
@@ -63,17 +63,17 @@ questions:
       - value: 1
         text: aktueller Hardware und Betriebssystemen
         targets:
-          - name: bewertung
+          - name: fitness
             score: 2
       - value: 2
         text: veralteter Hardware oder Betriebssystemen, können aber aktualisiert werden
         targets:
-          - name: bewertung
+          - name: fitness
             score: 1
       - value: 4
         text: laufen auf veralteter Hardware oder Betriebssystemen und können nicht mehr aktualisiert werden
         targets:
-          - name: bewertung
+          - name: fitness
             score: 0
   - id: 5
     text: Die eingesetzte Drittsoftware (Datenbanken, Frameworks, Bibliotheken, etc.) laufen...
@@ -82,17 +82,17 @@ questions:
       - value: 1
         text: in aktuellen Versionen auf dem aktuellem Betriebssystem
         targets:
-          - name: bewertung
+          - name: fitness
             score: 2
       - value: 2
         text: in zum Teil veralteten Versionen auf dem aktuellem Betriebssystem
         targets:
-          - name: bewertung
+          - name: fitness
             score: 1
       - value: 4
         text: nicht mehr auf dem aktuellem Betriebssystem
         targets:
-          - name: bewertung
+          - name: fitness
             score: 0
   - id: 6
     text: Ein Backup ist...
@@ -101,15 +101,15 @@ questions:
       - value: 1
         text: vorhanden und die Wiederherstellung wurde getestet
         targets:
-          - name: bewertung
+          - name: fitness
             score: 2
       - value: 2
         text: vorhanden, doch Wiederherstellung wurde nicht getestet
         targets:
-          - name: bewertung
+          - name: fitness
             score: 1
       - value: 4
         text: ist nicht vorhanden
         targets:
-          - name: bewertung
+          - name: fitness
             score: 0
