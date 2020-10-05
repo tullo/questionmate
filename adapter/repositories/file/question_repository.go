@@ -25,9 +25,6 @@ func NewQuestionRepository(path string, parser parser.Parser) QuestionRepository
 	if bytes, ok := readFile(path + "/descriptions." + parser.Suffix()); ok {
 		descriptions = parser.ParseDescriptions(bytes)
 	}
-	if bytes, ok := readFile(path + "/targets" + parser.Suffix()); ok {
-		targets = parser.ParseTargets(bytes)
-	}
 	return QuestionRepository{Questions: questions, Descriptions: descriptions, Targets: targets}
 }
 

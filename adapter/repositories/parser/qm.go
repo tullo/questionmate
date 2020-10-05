@@ -15,16 +15,6 @@ func (p QMParser) Suffix() string {
 	return "qm"
 }
 
-func (p QMParser) ParseTargets(data []byte) map[string]string {
-	lines := strings.Split(string(data), "\n")
-	targets := make(map[string]string)
-	for _, l := range lines {
-		t := strings.Split(l, ":")
-		targets[strings.Trim(t[0], " ")] = strings.Trim(t[1], " ")
-	}
-	return targets
-}
-
 func (p QMParser) ParseDescriptions(data []byte) map[int]string {
 	lines := strings.Split(string(data), "\n")
 	descriptions := make(map[int]string)
