@@ -63,11 +63,11 @@ type Target struct {
 	Score int    `json:"score"`
 }
 
-type Evaluation struct {
+type Assessment struct {
 	Targets []*Target `json:"targets"`
 }
 
-func (e Evaluation) GetTarget(s string) (*Target, bool) {
+func (e Assessment) GetTarget(s string) (*Target, bool) {
 	for _, t := range e.Targets {
 		if t.Text == s {
 			return t, true

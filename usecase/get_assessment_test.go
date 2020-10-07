@@ -20,7 +20,7 @@ func TestProcess(t *testing.T) {
 	}
 	answers := []domain.Answer{a1}
 	usecase := Evaluator{QuestionRepository: questionRepository}
-	e := usecase.GetEvaluation(answers)
+	e := usecase.GetAssessment(answers)
 	t1, ok := e.GetTarget("t1")
 	assert.True(t, ok)
 	assert.Equal(t, 10, t1.Score)

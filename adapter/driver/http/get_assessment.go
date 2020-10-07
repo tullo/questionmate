@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-func MakeEvaluationsHandler(evaluator usecase.Evaluator) http.HandlerFunc {
+func MakeAssessmentHandler(evaluator usecase.Evaluator) http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		b, err := ioutil.ReadAll(request.Body)
 		if err != nil {
@@ -27,13 +27,14 @@ func MakeEvaluationsHandler(evaluator usecase.Evaluator) http.HandlerFunc {
 			return
 		}
 
-		evaluation := evaluator.GetEvaluation(body.Answers)
+		evaluation := evaluator.GetAssessment(body.Answers)
 		data, err := json.Marshal(evaluation)
 		if err != nil {
 			log.Printf("error: %s", err)
 			writer.WriteHeader(http.StatusInternalServerError)
 			return
 		}
+		writer.Header().Set("Content-Type", "application/json")
 		_, err = writer.Write(data)
 		if err != nil {
 			log.Printf("error: %s", err)

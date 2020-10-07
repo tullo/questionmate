@@ -1,9 +1,10 @@
 package parser
 
 import (
+	"log"
+
 	"github.com/rwirdemann/questionmate/domain"
 	"gopkg.in/yaml.v2"
-	"log"
 )
 
 type question struct {
@@ -55,12 +56,4 @@ func (Y YAMLParser) ParseQuestions(data []byte) []domain.Question {
 
 	}
 	return questions
-}
-
-func (Y YAMLParser) ParseDescriptions([]byte) map[int]string {
-	panic("implement me")
-}
-
-func (Y YAMLParser) ParseTargets([]byte) map[string]string {
-	panic("implement me")
 }
