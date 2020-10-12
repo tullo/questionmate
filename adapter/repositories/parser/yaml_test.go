@@ -25,3 +25,21 @@ func TestParseYAMLQuestions(t *testing.T) {
 	assert.Equal(t, "vollständig vorhanden und übersetzbar", questions[0].Options[0].Text)
 	assert.Equal(t, 2, questions[0].Options[0].Targets["fitness"].Value)
 }
+
+func TestParseYAMLRatings(t *testing.T) {
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "coma/ratings.yaml")
+	data, err := ioutil.ReadFile(fn)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	parser := YAMLParser{}
+	ratings := parser.ParseRatings(data)
+	assert.Equal(t, 0, ratings["fitness"][0].Min)
+	assert.Equal(t, 5, ratings["fitness"][0].Max)
+	assert.Equal(t, "Akuter Handlungsbedarf, da in einem Fehlerfall nicht das Problem behoben werden kann, sondern erst aufwendige Vorarbeiten erledigt werden müssen. Das System ist akut gefährdet.", ratings["fitness"][0].Description)
+
+	assert.Equal(t, 6, ratings["fitness"][1].Min)
+	assert.Equal(t, 11, ratings["fitness"][1].Max)
+	assert.Equal(t, "Hier besteht Handlungsbedarf, um im Fehlerfall vorbereitet zu sein.", ratings["fitness"][1].Description)
+}

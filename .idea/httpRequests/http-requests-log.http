@@ -1,0 +1,447 @@
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-10-12T120000.200.json
+
+###
+
+POST http://localhost:8080/legacylab/assessment
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-10-12T115902.200.json
+
+###
+
+POST http://localhost:8080/legacylab/assessment
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-10-07T070059.200.json
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-10-07T070053.200.json
+
+###
+
+POST http://localhost:8080/legacylab/assessment
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-10-07T070004.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/evaluations
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-10-07T065945.404.txt
+
+###
+
+POST http://localhost:8080/legacylab/evaluations
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-10-07T065841.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-10-07T063244.200.json
+
+###
+
+POST http://localhost:8080/legacylab/evaluations
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-10-07T063146.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{   "answers": [     {       "question_id": 1,       "value": 1     }   ] }
+
+<> 2020-10-07T062959.200.json
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{   "answers": [     {       "question_id": 1,       "value": 1     }   ] }
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-09-01T041213.200.json
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-08-28T020502.200.json
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-08-26T021710.200.json
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-08-26T015329.200.json
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-08-26T015253.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-08-26T015248.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-08-26T015156.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-08-26T015044.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "value": 1
+    }
+  ]
+}
+
+<> 2020-08-26T015014.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+  ]
+}
+
+<> 2020-08-26T014924-1.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+  ]
+}
+
+<> 2020-08-26T014924.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+  ]
+}
+
+<> 2020-08-26T014923.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+  ]
+}
+
+<> 2020-08-26T014922.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+  ]
+}
+
+<> 2020-08-26T014917.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Content-Type: application/json
+
+{
+  "answers": [
+  ]
+}
+
+<> 2020-08-26T014852.200.txt
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8080/legacylab/questions
+Accept: */*
+Cache-Control: no-cache
+
+###
+

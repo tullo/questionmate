@@ -1,0 +1,15 @@
+ratings:
+  - target: fitness
+    values:
+      - id: 1
+        min: 0
+        max: 5
+        description: Akuter Handlungsbedarf, da in einem Fehlerfall nicht das Problem behoben werden kann, sondern erst aufwendige Vorarbeiten erledigt werden müssen. Das System ist akut gefährdet.
+      - id: 2
+        min: 6
+        max: 11
+        description: Hier besteht Handlungsbedarf, um im Fehlerfall vorbereitet zu sein.
+      - id: 3
+        min: 12
+        max: 12
+        description: Alles ok! Sie sind super augestellt.

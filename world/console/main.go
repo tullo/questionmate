@@ -12,8 +12,8 @@ import (
 
 func main() {
 	// 1. Instantiate the "I need to go out httpadapter"
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/legacylab-short", os.Getenv("GOPATH"))
-	repositoryAdapter := file.NewQuestionRepository(fn, parser.QMParser{})
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/coma", os.Getenv("GOPATH"))
+	repositoryAdapter := file.NewQuestionRepository(fn, parser.YAMLParser{})
 
 	// 2. Instantiate the hexagon
 	hexagon := usecase.NextQuestion{QuestionRepository: repositoryAdapter}

@@ -8,6 +8,11 @@ import (
 
 type MockQuestionRepository struct {
 	questions []domain.Question
+	ratings   map[string][]domain.Rating
+}
+
+func (m MockQuestionRepository) GetRatings() map[string][]domain.Rating {
+	return m.ratings
 }
 
 func (m MockQuestionRepository) GetDescriptions() map[int]string {
@@ -46,8 +51,4 @@ func TestNextQuestion(t *testing.T) {
 	q, b = questionReader.NextQuestion(answers)
 	assert.True(t, b)
 	assert.Equal(t, 3, q.ID)
-}
-
-func TestConsiderDependency(t *testing.T) {
-
 }

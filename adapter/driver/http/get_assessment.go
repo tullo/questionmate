@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-func MakeAssessmentHandler(evaluator usecase.Evaluator) http.HandlerFunc {
+func MakeAssessmentHandler(evaluator usecase.Assessment) http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		b, err := ioutil.ReadAll(request.Body)
 		if err != nil {

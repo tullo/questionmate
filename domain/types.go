@@ -59,10 +59,20 @@ type Answer struct {
 }
 
 type Target struct {
-	Text  string `json:"text"`
-	Score int    `json:"score"`
+	Text   string `json:"text"`
+	Score  int    `json:"score"`
+	Rating string `json:"rating"`
 }
 
+// Rating models a textual description to rate a specific target based on its min / max score.
+type Rating struct {
+	Target      string
+	Min         int
+	Max         int
+	Description string
+}
+
+// Assessment models the overall assessment of an answer set across all targets.
 type Assessment struct {
 	Targets []*Target `json:"targets"`
 }

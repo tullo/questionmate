@@ -2,11 +2,11 @@ package usecase
 
 import "github.com/rwirdemann/questionmate/domain"
 
-type Evaluator struct {
+type Assessment struct {
 	QuestionRepository questionRepository
 }
 
-func (e Evaluator) GetAssessment(answers []domain.Answer) domain.Assessment {
+func (e Assessment) GetAssessment(answers []domain.Answer) domain.Assessment {
 	questions := e.QuestionRepository.GetQuestions()
 	assessment := domain.Assessment{}
 	for _, answer := range answers {
@@ -21,6 +21,18 @@ func (e Evaluator) GetAssessment(answers []domain.Answer) domain.Assessment {
 							Score: score.Value,
 						})
 					}
+				}
+			}
+		}
+	}
+
+	ratings := e.QuestionRepository.GetRatings()
+	for _, t := range assessment.Targets {
+		if values, ok := ratings[t.Text]; ok {
+			for _, v := range values {
+				if t.Score >= v.Min && t.Score <= v.Max {
+					t.Rating = v.Description
+					break
 				}
 			}
 		}

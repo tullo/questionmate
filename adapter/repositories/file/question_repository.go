@@ -12,17 +12,24 @@ type QuestionRepository struct {
 	Questions    []domain.Question
 	Descriptions map[int]string
 	Targets      map[string]string
+	Ratings      map[string][]domain.Rating
 }
 
 func NewQuestionRepository(path string, parser parser.Parser) QuestionRepository {
 	var questions []domain.Question
+	var ratings map[string][]domain.Rating
 	var descriptions map[int]string
 	var targets map[string]string
 
 	if bytes, ok := readFile(path + "/questions." + parser.Suffix()); ok {
 		questions = parser.ParseQuestions(bytes)
 	}
-	return QuestionRepository{Questions: questions, Descriptions: descriptions, Targets: targets}
+
+	if bytes, ok := readFile(path + "/ratings." + parser.Suffix()); ok {
+		ratings = parser.ParseRatings(bytes)
+	}
+
+	return QuestionRepository{Questions: questions, Ratings: ratings, Descriptions: descriptions, Targets: targets}
 }
 
 func readFile(file string) ([]byte, bool) {
@@ -36,6 +43,10 @@ func readFile(file string) ([]byte, bool) {
 
 func (q QuestionRepository) GetQuestions() []domain.Question {
 	return q.Questions
+}
+
+func (q QuestionRepository) GetRatings() map[string][]domain.Rating {
+	return q.Ratings
 }
 
 func (q QuestionRepository) GetDescriptions() map[int]string {

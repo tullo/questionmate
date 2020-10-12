@@ -1,9 +1,0 @@
-targets:
-  - name: fitness
-    assesments:
-      - id: 1
-        min: 0
-        max: 5
-        description: >
-          Akuter Handlungsbedarf, da in einem Fehlerfall nicht das Problem behoben werden kann, sondern erst
-          aufwendige Vorarbeiten erledigt werden müssen. Das System ist akut gefährdet.

@@ -28,7 +28,45 @@ type t struct {
 	Questions []question `yaml:",flow"`
 }
 
+type value struct {
+	Min         int    `yaml:"min"`
+	Max         int    `yaml:"max"`
+	Description string `yaml:"description"`
+}
+
+type ratings struct {
+	Target string  `yaml:"target"`
+	Values []value `yaml:",flow"`
+}
+
+type a struct {
+	Ratings []ratings `yaml:",flow"`
+}
+
 type YAMLParser struct {
+}
+
+func (Y YAMLParser) ParseRatings(data []byte) map[string][]domain.Rating {
+	m := a{}
+	err := yaml.Unmarshal(data, &m)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ranges := make(map[string][]domain.Rating)
+	for _, v := range m.Ratings {
+		assessmentRanges := ranges[v.Target]
+		for _, r := range v.Values {
+			assessmentRanges = append(assessmentRanges, domain.Rating{
+				Target:      v.Target,
+				Min:         r.Min,
+				Max:         r.Max,
+				Description: r.Description,
+			})
+		}
+		ranges[v.Target] = assessmentRanges
+	}
+	return ranges
 }
 
 func (Y YAMLParser) Suffix() string {

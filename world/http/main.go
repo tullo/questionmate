@@ -24,7 +24,7 @@ func main() {
 
 	// 2. Instantiate the hexagons
 	hexagon := usecase.NextQuestion{QuestionRepository: repositoryAdapter}
-	evaluator := usecase.Evaluator{QuestionRepository: repositoryAdapter}
+	evaluator := usecase.Assessment{QuestionRepository: repositoryAdapter}
 
 	// 3. Instantiate the "I need to go in adapter"
 	nextQuestoionHttpAdapter := httpadapter.MakeNextQuestionHandler(hexagon)

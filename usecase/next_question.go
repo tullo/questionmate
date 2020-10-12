@@ -13,6 +13,7 @@ type QuestionReader interface {
 // Right side port
 type questionRepository interface {
 	GetQuestions() []domain.Question
+	GetRatings() map[string][]domain.Rating
 	GetDescriptions() map[int]string
 }
 
