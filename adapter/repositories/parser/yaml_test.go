@@ -10,6 +10,18 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestParseYAMLQuestionannaire(t *testing.T) {
+	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "coma/questions.yaml")
+	data, err := ioutil.ReadFile(fn)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	parser := YAMLParser{}
+	questionnaire := parser.ParseQuestionnaire(data)
+	assert.Equal(t, "Dieser Fragebogen enthält sechs Fragen zum Zustand Ihres Softwaresystems. Nach Beantwortung der Fragen erhalten Sie eine erste Einschätzung sowie eine Bewertung Ihres Systems.", questionnaire.Abstract)
+}
+
 func TestParseYAMLQuestions(t *testing.T) {
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "coma/questions.yaml")
 	data, err := ioutil.ReadFile(fn)

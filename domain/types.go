@@ -4,6 +4,11 @@ import (
 	"strconv"
 )
 
+type Questionnaire struct {
+	Abstract  string     `json:"abstract"`
+	Questions []Question `json:"questions"`
+}
+
 type Question struct {
 	ID           int       `json:"id"`
 	Text         string    `json:"text"`
@@ -49,6 +54,7 @@ func NewOption(value int, text string) *Option {
 	return &o
 }
 
+// todo: why do we need this type?
 type Score struct {
 	Value int
 }

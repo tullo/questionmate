@@ -11,6 +11,10 @@ import (
 type QMParser struct {
 }
 
+func (p QMParser) ParseQuestionnaire(data []byte) domain.Questionnaire {
+	panic("implement me")
+}
+
 func (p QMParser) ParseRatings(data []byte) map[string][]domain.Rating {
 	panic("implement me")
 }

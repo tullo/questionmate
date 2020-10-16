@@ -27,11 +27,11 @@ func main() {
 	evaluator := usecase.Assessment{QuestionRepository: repositoryAdapter}
 
 	// 3. Instantiate the "I need to go in adapter"
-	nextQuestoionHttpAdapter := httpadapter.MakeNextQuestionHandler(hexagon)
+	nextQuestionHttpAdapter := httpadapter.MakeNextQuestionHandler(hexagon)
 	evaluatorHttpAdapter := httpadapter.MakeAssessmentHandler(evaluator)
 
 	r := mux.NewRouter()
-	r.HandleFunc("/{questionaire}/questions", nextQuestoionHttpAdapter).Methods("POST")
+	r.HandleFunc("/{questionaire}/questions", nextQuestionHttpAdapter).Methods("POST")
 	r.HandleFunc("/{questionaire}/assessment", evaluatorHttpAdapter).Methods("POST")
 	log.Printf("Service listening on http://localhost:8080...")
 	handler := cors.AllowAll().Handler(r)

@@ -25,7 +25,8 @@ type target struct {
 }
 
 type t struct {
-	Questions []question `yaml:",flow"`
+	Description string     `yaml:"description"`
+	Questions   []question `yaml:",flow"`
 }
 
 type value struct {
@@ -41,6 +42,10 @@ type ratings struct {
 
 type a struct {
 	Ratings []ratings `yaml:",flow"`
+}
+
+type questionnaire struct {
+	Abstract string `yaml:"abstract"`
 }
 
 type YAMLParser struct {
@@ -94,4 +99,16 @@ func (Y YAMLParser) ParseQuestions(data []byte) []domain.Question {
 
 	}
 	return questions
+}
+
+func (Y YAMLParser) ParseQuestionnaire(data []byte) domain.Questionnaire {
+	q := questionnaire{}
+	err := yaml.Unmarshal(data, &q)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return domain.Questionnaire{
+		Abstract: q.Abstract,
+	}
 }
