@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	// 1. Instantiate the "I need to go out httpadapter"
+	// 1. Instantiate the "I need to go out adapter"
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/coma", os.Getenv("GOPATH"))
 	repositoryAdapter := file.NewQuestionRepository(fn, parser.YAMLParser{})
 
