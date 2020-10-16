@@ -8,14 +8,17 @@ import (
 	"log"
 )
 
+// todo: rename to QuestionnaireRepository
 type QuestionRepository struct {
-	Questions    []domain.Question
-	Descriptions map[int]string
-	Targets      map[string]string
-	Ratings      map[string][]domain.Rating
+	questionnaire domain.Questionnaire
+	Questions     []domain.Question
+	Descriptions  map[int]string
+	Targets       map[string]string
+	Ratings       map[string][]domain.Rating
 }
 
 func NewQuestionRepository(path string, parser parser.Parser) QuestionRepository {
+	var questionnaire domain.Questionnaire
 	var questions []domain.Question
 	var ratings map[string][]domain.Rating
 	var descriptions map[int]string
@@ -23,13 +26,15 @@ func NewQuestionRepository(path string, parser parser.Parser) QuestionRepository
 
 	if bytes, ok := readFile(path + "/questions." + parser.Suffix()); ok {
 		questions = parser.ParseQuestions(bytes)
+		questionnaire = parser.ParseQuestionnaire(bytes)
 	}
 
 	if bytes, ok := readFile(path + "/ratings." + parser.Suffix()); ok {
 		ratings = parser.ParseRatings(bytes)
 	}
 
-	return QuestionRepository{Questions: questions, Ratings: ratings, Descriptions: descriptions, Targets: targets}
+	return QuestionRepository{questionnaire: questionnaire,
+		Questions: questions, Ratings: ratings, Descriptions: descriptions, Targets: targets}
 }
 
 func readFile(file string) ([]byte, bool) {
@@ -51,6 +56,10 @@ func (q QuestionRepository) GetRatings() map[string][]domain.Rating {
 
 func (q QuestionRepository) GetDescriptions() map[int]string {
 	return q.Descriptions
+}
+
+func (q QuestionRepository) GetQuestionnaire() domain.Questionnaire {
+	return q.questionnaire
 }
 
 func (q QuestionRepository) String() string {

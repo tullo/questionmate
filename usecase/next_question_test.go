@@ -11,6 +11,10 @@ type MockQuestionRepository struct {
 	ratings   map[string][]domain.Rating
 }
 
+func (m MockQuestionRepository) GetQuestionnaire() domain.Questionnaire {
+	panic("implement me")
+}
+
 func (m MockQuestionRepository) GetRatings() map[string][]domain.Rating {
 	return m.ratings
 }
