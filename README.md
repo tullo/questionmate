@@ -138,9 +138,9 @@ Questionnaire --> *Question --> *Option --> *Target
                     Answer --------/       Assessment
 ```
 
-A Questionnaire consists of many Questions. A question has many options, whereby each options represents a possibe answer. Each option has many targets to which this option pays . 
+A Questionnaire consists of many Questions. A question has many options, whereby each options represents a possibe answer. Each option has many targets to which this option pays. 
 
-An answert models a user's answer to a question, thus the answer's values must match one of the option values of its question.  
+An answer models a user's answer to a question, thus the answer's values must match one of the option values of its question.  
 
 
 ## License
