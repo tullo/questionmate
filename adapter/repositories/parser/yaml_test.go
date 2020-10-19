@@ -19,7 +19,7 @@ func TestParseYAMLQuestionannaire(t *testing.T) {
 
 	parser := YAMLParser{}
 	questionnaire := parser.ParseQuestionnaire(data)
-	assert.Equal(t, "Dieser Fragebogen enthält sechs Fragen zum Zustand Ihres Softwaresystems. Nach Beantwortung der Fragen erhalten Sie eine erste Einschätzung sowie eine Bewertung Ihres Systems.", questionnaire.Abstract)
+	assert.Equal(t, "Dieser Fragebogen enthält sechs Fragen zum Zustand Ihres Softwaresystems. Nach Beantwortung der Fragen erhalten Sie eine erste Einschätzung sowie eine Bewertung Ihres Systems. Auf gehts.", questionnaire.Abstract)
 }
 
 func TestParseYAMLQuestions(t *testing.T) {
@@ -49,9 +49,9 @@ func TestParseYAMLRatings(t *testing.T) {
 	ratings := parser.ParseRatings(data)
 	assert.Equal(t, 0, ratings["fitness"][0].Min)
 	assert.Equal(t, 5, ratings["fitness"][0].Max)
-	assert.Equal(t, "Akuter Handlungsbedarf, da in einem Fehlerfall nicht das Problem behoben werden kann, sondern erst aufwendige Vorarbeiten erledigt werden müssen. Das System ist akut gefährdet.", ratings["fitness"][0].Description)
+	assert.Equal(t, "Es besteht akuter Handlungsbedarf, da in einem Fehlerfall nicht das Problem behoben werden kann, sondern erst aufwendige Vorarbeiten erledigt werden müssen. Das System ist akut gefährdet.", ratings["fitness"][0].Description)
 
 	assert.Equal(t, 6, ratings["fitness"][1].Min)
 	assert.Equal(t, 11, ratings["fitness"][1].Max)
-	assert.Equal(t, "Hier besteht Handlungsbedarf, um im Fehlerfall vorbereitet zu sein.", ratings["fitness"][1].Description)
+	assert.Equal(t, "Es besteht Handlungsbedarf, um im Fehlerfall vorbereitet zu sein.", ratings["fitness"][1].Description)
 }

@@ -54,7 +54,7 @@ A target might contain an optional rating description that explains or assesses 
 
 ## API
 
-**POST http://questionmate.ralfwirdemann.de/{questionaire}/questions**
+**POST http://questionmate.ralfwirdemann.de/{questionnaire}/questions**
 
 Returns the next question according to the answers the user has given so far contained in the request body as follows:
 
@@ -89,7 +89,7 @@ HTTP/1.1 200 Ok
 }
 ```
 
-**POST http://questionmate.ralfwirdemann.de/{questionaire}/assessment**
+**POST http://questionmate.ralfwirdemann.de/{questionnaire}/assessment**
 
 Returns the assessment of the answers contained in the request body as follows:
 

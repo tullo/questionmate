@@ -1,6 +1,6 @@
 abstract: >-
   Dieser Fragebogen enthält sechs Fragen zum Zustand Ihres Softwaresystems. Nach Beantwortung
-  der Fragen erhalten Sie eine erste Einschätzung sowie eine Bewertung Ihres Systems.
+  der Fragen erhalten Sie eine erste Einschätzung sowie eine Bewertung Ihres Systems. Auf gehts.
 questions:
   - id: 1
     text: Die aktuellen Sourcen sind...

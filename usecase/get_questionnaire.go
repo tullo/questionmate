@@ -2,10 +2,17 @@ package usecase
 
 import "github.com/rwirdemann/questionmate/domain"
 
-type Questionnaire struct {
-	Repository questionRepository
+type GetQuestionnaire struct {
+	Repositories map[string]questionRepository
 }
 
-func (receiver Questionnaire) Get() domain.Questionnaire {
-	return receiver.Repository.GetQuestionnaire()
+func NewGetQuestionnaire() GetQuestionnaire {
+	return GetQuestionnaire{Repositories: make(map[string]questionRepository)}
+}
+
+func (receiver GetQuestionnaire) Process(name string) (domain.Questionnaire, bool) {
+	if r, ok := receiver.Repositories[name]; ok {
+		return r.GetQuestionnaire(), true
+	}
+	return domain.Questionnaire{}, false
 }

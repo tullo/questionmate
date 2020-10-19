@@ -23,16 +23,21 @@ func main() {
 	repositoryAdapter := file.NewQuestionRepository(*directoryPtr, parser.YAMLParser{})
 
 	// 2. Instantiate the hexagons
+	getQuestionnaire := usecase.NewGetQuestionnaire()
+	getQuestionnaire.Repositories["coma"] = repositoryAdapter
+
 	hexagon := usecase.NextQuestion{QuestionRepository: repositoryAdapter}
 	evaluator := usecase.Assessment{QuestionRepository: repositoryAdapter}
 
 	// 3. Instantiate the "I need to go in adapter"
+	getQuestionnaireHttpAdapter := httpadapter.MakeGetQuestionnaireHandler(getQuestionnaire)
 	nextQuestionHttpAdapter := httpadapter.MakeNextQuestionHandler(hexagon)
 	evaluatorHttpAdapter := httpadapter.MakeAssessmentHandler(evaluator)
 
 	r := mux.NewRouter()
-	r.HandleFunc("/{questionaire}/questions", nextQuestionHttpAdapter).Methods("POST")
-	r.HandleFunc("/{questionaire}/assessment", evaluatorHttpAdapter).Methods("POST")
+	r.HandleFunc("/{questionnaire}", getQuestionnaireHttpAdapter).Methods("GET")
+	r.HandleFunc("/{questionnaire}/questions", nextQuestionHttpAdapter).Methods("POST")
+	r.HandleFunc("/{questionnaire}/assessment", evaluatorHttpAdapter).Methods("POST")
 	log.Printf("Service listening on http://localhost:8080...")
 	handler := cors.AllowAll().Handler(r)
 	_ = http.ListenAndServe(":8080", handler)
