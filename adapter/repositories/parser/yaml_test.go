@@ -19,7 +19,7 @@ func TestParseYAMLQuestionannaire(t *testing.T) {
 
 	parser := YAMLParser{}
 	questionnaire := parser.ParseQuestionnaire(data)
-	assert.Equal(t, "Dieser Fragebogen enthält sechs Fragen zum Zustand Ihres Softwaresystems. Nach Beantwortung der Fragen erhalten Sie eine erste Einschätzung sowie eine Bewertung Ihres Systems. Auf gehts.", questionnaire.Abstract)
+	assert.Equal(t, "Dieser Fragebogen enthält sechs Fragen zum Zustand Ihres Softwaresystems. Nach Beantwortung der Fragen erhalten Sie eine erste Einschätzung sowie eine Bewertung Ihres Systems. Danke an Thomas Ronzon, der uns die Fragen zur Verfügung gestellt hat. Auf gehts...", questionnaire.Abstract)
 }
 
 func TestParseYAMLQuestions(t *testing.T) {
