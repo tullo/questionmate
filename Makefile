@@ -7,9 +7,11 @@ deploy: build
 	scp -r config/* 95.217.222.60:~/questionmate/config
 	ssh 95.217.222.60 "sh -c 'nohup /home/ralf/questionmate/bin/questionmate -directory=/home/ralf/questionmate/config/coma > /dev/null 2>&1 &'"
 
+test: export SRC_ROOT=${PWD}
 test:
-	env go test -count=1 ./...
+	env go test -v -count=1 ./...
 
+test-all: export SRC_ROOT=${PWD}
 test-all:
 	env go test -count=1 ./... -tags=integration
 

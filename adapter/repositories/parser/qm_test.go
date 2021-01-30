@@ -2,12 +2,13 @@ package parser
 
 import (
 	"fmt"
-	"github.com/rwirdemann/questionmate/domain"
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"testing"
 
+	"github.com/rwirdemann/questionmate/domain"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -15,6 +16,9 @@ var parser QMParser
 
 func TestParseQuestions(t *testing.T) {
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate/questions.qm")
+	if dir, ok := os.LookupEnv("SRC_ROOT"); ok {
+		fn = filepath.Join(dir, "config", "questionmate", "questions.qm")
+	}
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)

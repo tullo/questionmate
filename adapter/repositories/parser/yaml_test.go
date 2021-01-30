@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -12,6 +13,9 @@ import (
 
 func TestParseYAMLQuestionannaire(t *testing.T) {
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "coma/questions.yaml")
+	if dir, ok := os.LookupEnv("SRC_ROOT"); ok {
+		fn = filepath.Join(dir, "config", "coma", "questions.yaml")
+	}
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)
@@ -24,6 +28,9 @@ func TestParseYAMLQuestionannaire(t *testing.T) {
 
 func TestParseYAMLQuestions(t *testing.T) {
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "coma/questions.yaml")
+	if dir, ok := os.LookupEnv("SRC_ROOT"); ok {
+		fn = filepath.Join(dir, "config", "coma", "questions.yaml")
+	}
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)
@@ -40,6 +47,9 @@ func TestParseYAMLQuestions(t *testing.T) {
 
 func TestParseYAMLRatings(t *testing.T) {
 	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "coma/ratings.yaml")
+	if dir, ok := os.LookupEnv("SRC_ROOT"); ok {
+		fn = filepath.Join(dir, "config", "coma", "ratings.yaml")
+	}
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)
