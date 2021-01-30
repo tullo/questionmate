@@ -18,6 +18,7 @@ import (
 func main() {
 	wd, err := os.Getwd()
 	if err != nil {
+		log.Println(err)
 		os.Exit(1)
 	}
 	fn := fmt.Sprintf("%s/config/coma", wd)

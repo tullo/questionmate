@@ -12,8 +12,9 @@ import (
 )
 
 func main() {
+	dir, _ := os.Getwd()
 	// 1. Instantiate the "I need to go out adapter"
-	fn := fmt.Sprintf("%s/src/github.com/tullo/questionmate/config/coma", os.Getenv("GOPATH"))
+	fn := fmt.Sprintf("%s/config/coma", dir)
 	repositoryAdapter := file.NewQuestionRepository(fn, parser.YAMLParser{})
 
 	// 2. Instantiate the hexagon
