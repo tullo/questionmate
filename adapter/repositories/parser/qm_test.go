@@ -8,14 +8,14 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/rwirdemann/questionmate/domain"
 	"github.com/stretchr/testify/assert"
+	"github.com/tullo/questionmate/domain"
 )
 
 var parser QMParser
 
 func TestParseQuestions(t *testing.T) {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate/questions.qm")
+	fn := fmt.Sprintf("%s/src/github.com/tullo/questionmate/config/%s", os.Getenv("GOPATH"), "questionmate/questions.qm")
 	if dir, ok := os.LookupEnv("SRC_ROOT"); ok {
 		fn = filepath.Join(dir, "config", "questionmate", "questions.qm")
 	}

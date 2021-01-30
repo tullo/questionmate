@@ -2,10 +2,11 @@ package file
 
 import (
 	"fmt"
-	"github.com/rwirdemann/questionmate/adapter/repositories/parser"
-	"github.com/rwirdemann/questionmate/domain"
 	"io/ioutil"
 	"log"
+
+	"github.com/tullo/questionmate/adapter/repositories/parser"
+	"github.com/tullo/questionmate/domain"
 )
 
 // todo: rename to QuestionnaireRepository

@@ -2,9 +2,10 @@ package console
 
 import (
 	"fmt"
-	"github.com/rwirdemann/questionmate/domain"
-	"github.com/rwirdemann/questionmate/usecase"
 	"log"
+
+	"github.com/tullo/questionmate/domain"
+	"github.com/tullo/questionmate/usecase"
 )
 
 type Adapter struct {

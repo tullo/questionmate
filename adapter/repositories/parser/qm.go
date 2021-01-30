@@ -1,11 +1,12 @@
 package parser
 
 import (
-	"github.com/rwirdemann/questionmate/domain"
 	"log"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/tullo/questionmate/domain"
 )
 
 type QMParser struct {

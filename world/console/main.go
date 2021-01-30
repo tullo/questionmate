@@ -2,17 +2,18 @@ package main
 
 import (
 	"fmt"
-	"github.com/rwirdemann/questionmate/adapter/driver/console"
-	"github.com/rwirdemann/questionmate/adapter/repositories/file"
-	"github.com/rwirdemann/questionmate/adapter/repositories/parser"
-	"github.com/rwirdemann/questionmate/domain"
-	"github.com/rwirdemann/questionmate/usecase"
 	"os"
+
+	"github.com/tullo/questionmate/adapter/driver/console"
+	"github.com/tullo/questionmate/adapter/repositories/file"
+	"github.com/tullo/questionmate/adapter/repositories/parser"
+	"github.com/tullo/questionmate/domain"
+	"github.com/tullo/questionmate/usecase"
 )
 
 func main() {
 	// 1. Instantiate the "I need to go out adapter"
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/coma", os.Getenv("GOPATH"))
+	fn := fmt.Sprintf("%s/src/github.com/tullo/questionmate/config/coma", os.Getenv("GOPATH"))
 	repositoryAdapter := file.NewQuestionRepository(fn, parser.YAMLParser{})
 
 	// 2. Instantiate the hexagon

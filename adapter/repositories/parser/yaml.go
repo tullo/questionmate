@@ -3,7 +3,7 @@ package parser
 import (
 	"log"
 
-	"github.com/rwirdemann/questionmate/domain"
+	"github.com/tullo/questionmate/domain"
 	"gopkg.in/yaml.v2"
 )
 

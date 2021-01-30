@@ -2,10 +2,11 @@ package http
 
 import (
 	"encoding/json"
-	"github.com/gorilla/mux"
-	"github.com/rwirdemann/questionmate/usecase"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
+	"github.com/tullo/questionmate/usecase"
 )
 
 func MakeGetQuestionnaireHandler(u usecase.GetQuestionnaire) http.HandlerFunc {

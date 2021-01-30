@@ -3,8 +3,8 @@ package usecase
 import (
 	"testing"
 
-	"github.com/rwirdemann/questionmate/domain"
 	"github.com/stretchr/testify/assert"
+	"github.com/tullo/questionmate/domain"
 )
 
 func TestProcess(t *testing.T) {

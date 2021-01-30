@@ -1,6 +1,6 @@
 package usecase
 
-import "github.com/rwirdemann/questionmate/domain"
+import "github.com/tullo/questionmate/domain"
 
 type Assessment struct {
 	QuestionRepository questionRepository

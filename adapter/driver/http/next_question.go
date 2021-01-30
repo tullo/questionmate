@@ -2,11 +2,12 @@ package http
 
 import (
 	"encoding/json"
-	"github.com/rwirdemann/questionmate/domain"
-	"github.com/rwirdemann/questionmate/usecase"
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/tullo/questionmate/domain"
+	"github.com/tullo/questionmate/usecase"
 )
 
 func MakeNextQuestionHandler(questionReader usecase.QuestionReader) http.HandlerFunc {

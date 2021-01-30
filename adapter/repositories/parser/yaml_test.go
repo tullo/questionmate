@@ -12,7 +12,7 @@ import (
 )
 
 func TestParseYAMLQuestionannaire(t *testing.T) {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "coma/questions.yaml")
+	fn := fmt.Sprintf("%s/src/github.com/tullo/questionmate/config/%s", os.Getenv("GOPATH"), "coma/questions.yaml")
 	if dir, ok := os.LookupEnv("SRC_ROOT"); ok {
 		fn = filepath.Join(dir, "config", "coma", "questions.yaml")
 	}
@@ -27,7 +27,7 @@ func TestParseYAMLQuestionannaire(t *testing.T) {
 }
 
 func TestParseYAMLQuestions(t *testing.T) {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "coma/questions.yaml")
+	fn := fmt.Sprintf("%s/src/github.com/tullo/questionmate/config/%s", os.Getenv("GOPATH"), "coma/questions.yaml")
 	if dir, ok := os.LookupEnv("SRC_ROOT"); ok {
 		fn = filepath.Join(dir, "config", "coma", "questions.yaml")
 	}
@@ -46,7 +46,7 @@ func TestParseYAMLQuestions(t *testing.T) {
 }
 
 func TestParseYAMLRatings(t *testing.T) {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/%s", os.Getenv("GOPATH"), "coma/ratings.yaml")
+	fn := fmt.Sprintf("%s/src/github.com/tullo/questionmate/config/%s", os.Getenv("GOPATH"), "coma/ratings.yaml")
 	if dir, ok := os.LookupEnv("SRC_ROOT"); ok {
 		fn = filepath.Join(dir, "config", "coma", "ratings.yaml")
 	}

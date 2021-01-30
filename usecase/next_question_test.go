@@ -1,8 +1,9 @@
 package usecase
 
 import (
-	"github.com/rwirdemann/questionmate/domain"
 	"github.com/stretchr/testify/assert"
+	"github.com/tullo/questionmate/domain"
+
 	"testing"
 )
 

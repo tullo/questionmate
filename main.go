@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/rwirdemann/questionmate/adapter/repositories/file"
-	"github.com/rwirdemann/questionmate/adapter/repositories/parser"
 	"os"
+
+	"github.com/tullo/questionmate/adapter/repositories/file"
+	"github.com/tullo/questionmate/adapter/repositories/parser"
 )
 
 func main() {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/legacylab", os.Getenv("GOPATH"))
+	fn := fmt.Sprintf("%s/src/github.com/tullo/questionmate/config/legacylab", os.Getenv("GOPATH"))
 	r := file.NewQuestionRepository(fn, parser.QMParser{})
 	fmt.Printf("%s", r)
 }

@@ -1,8 +1,9 @@
 package usecase
 
 import (
-	"github.com/rwirdemann/questionmate/domain"
 	"sort"
+
+	"github.com/tullo/questionmate/domain"
 )
 
 // Left side port

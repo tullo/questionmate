@@ -9,10 +9,10 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
-	httpadapter "github.com/rwirdemann/questionmate/adapter/driver/http"
-	"github.com/rwirdemann/questionmate/adapter/repositories/file"
-	"github.com/rwirdemann/questionmate/adapter/repositories/parser"
-	"github.com/rwirdemann/questionmate/usecase"
+	httpadapter "github.com/tullo/questionmate/adapter/driver/http"
+	"github.com/tullo/questionmate/adapter/repositories/file"
+	"github.com/tullo/questionmate/adapter/repositories/parser"
+	"github.com/tullo/questionmate/usecase"
 )
 
 func main() {
