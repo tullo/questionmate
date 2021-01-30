@@ -3,19 +3,24 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
+	"net/http"
+	"os"
+
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	httpadapter "github.com/rwirdemann/questionmate/adapter/driver/http"
 	"github.com/rwirdemann/questionmate/adapter/repositories/file"
 	"github.com/rwirdemann/questionmate/adapter/repositories/parser"
 	"github.com/rwirdemann/questionmate/usecase"
-	"log"
-	"net/http"
-	"os"
 )
 
 func main() {
-	fn := fmt.Sprintf("%s/src/github.com/rwirdemann/questionmate/config/coma", os.Getenv("GOPATH"))
+	wd, err := os.Getwd()
+	if err != nil {
+		os.Exit(1)
+	}
+	fn := fmt.Sprintf("%s/config/coma", wd)
 	directoryPtr := flag.String("directory", fn, "the questions directory")
 	flag.Parse()
 
