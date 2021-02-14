@@ -25,16 +25,16 @@ func NewQuestion(id int, text string) Question {
 }
 
 func (q Question) GetOption(value int) (Option, bool) {
-	for _, option := range q.Options {
-		if option.Value == value {
-			return *option, true
+	for _, o := range q.Options {
+		if o.Value == value {
+			return *o, true
 		}
 	}
 	return Option{}, false
 }
 
-func (q Question) GetOptionByString(value string) (Option, bool) {
-	i, err := strconv.Atoi(value)
+func (q Question) GetOptionByString(val string) (Option, bool) {
+	i, err := strconv.Atoi(val)
 	if err != nil {
 		return Option{}, false
 	}
@@ -48,8 +48,8 @@ type Option struct {
 	Targets map[string]Score `json:"targets"`
 }
 
-func NewOption(value int, text string) *Option {
-	o := Option{Value: value, Text: text}
+func NewOption(val int, txt string) *Option {
+	o := Option{Value: val, Text: txt}
 	o.Targets = make(map[string]Score)
 	return &o
 }

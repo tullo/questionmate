@@ -37,37 +37,37 @@ func (p QMParser) ParseDescriptions(data []byte) map[int]string {
 
 func (p QMParser) ParseQuestions(data []byte) []domain.Question {
 	lines := strings.Split(string(data), "\n")
-	var questions []domain.Question
+	var qs []domain.Question
 	var option *domain.Option
 
 	for _, l := range lines {
 		if isQuestion(l) {
 			q := strings.Split(l, ":")
 			id := toInt(q[0])
-			questions = append(questions, domain.NewQuestion(id, strings.Trim(q[1], " ")))
+			qs = append(qs, domain.NewQuestion(id, strings.Trim(q[1], " ")))
 		}
 
-		if len(questions) > 0 && isType(l) {
+		if len(qs) > 0 && isType(l) {
 			t := strings.Split(l, ":")
-			questions[len(questions)-1].Type = strings.Trim(t[1], " ")
+			qs[len(qs)-1].Type = strings.Trim(t[1], " ")
 		}
-		if len(questions) > 0 && isDesc(l) {
+		if len(qs) > 0 && isDesc(l) {
 			t := strings.Split(l, ":")
-			questions[len(questions)-1].Desc = strings.Trim(t[1], " ")
+			qs[len(qs)-1].Desc = strings.Trim(t[1], " ")
 		}
 
-		if len(questions) > 0 && isDependency(l) {
+		if len(qs) > 0 && isDependency(l) {
 			d := strings.Split(l, "=>")
 			questionID := toInt(d[0])
 			optionID := toInt(d[1])
-			questions[len(questions)-1].Dependencies[questionID] = optionID
+			qs[len(qs)-1].Dependencies[questionID] = optionID
 		}
 
-		if len(questions) > 0 && isOption(l) {
+		if len(qs) > 0 && isOption(l) {
 			o := strings.Split(l, ":")
 			id := toInt(o[0])
 			option = domain.NewOption(id, strings.Trim(o[1], " "))
-			questions[len(questions)-1].Options = append(questions[len(questions)-1].Options, option)
+			qs[len(qs)-1].Options = append(qs[len(qs)-1].Options, option)
 		}
 
 		if option != nil && isTarget(l) {
@@ -78,7 +78,7 @@ func (p QMParser) ParseQuestions(data []byte) []domain.Question {
 		}
 	}
 
-	return questions
+	return qs
 }
 
 func isDesc(s string) bool {

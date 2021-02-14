@@ -10,6 +10,6 @@ import (
 
 func main() {
 	fn := fmt.Sprintf("%s/src/github.com/tullo/questionmate/config/legacylab", os.Getenv("GOPATH"))
-	r := file.NewQuestionRepository(fn, parser.QMParser{})
+	r := file.NewQuestionnaireRepository(fn, parser.QMParser{})
 	fmt.Printf("%s", r)
 }

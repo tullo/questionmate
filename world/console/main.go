@@ -15,18 +15,18 @@ func main() {
 	dir, _ := os.Getwd()
 	// 1. Instantiate the "I need to go out adapter"
 	fn := fmt.Sprintf("%s/config/coma", dir)
-	repositoryAdapter := file.NewQuestionRepository(fn, parser.YAMLParser{})
+	repo := file.NewQuestionnaireRepository(fn, parser.YAMLParser{})
 
 	// 2. Instantiate the hexagon
-	hexagon := usecase.NextQuestion{QuestionRepository: repositoryAdapter}
+	hexagon := usecase.NextQuestion{QR: repo}
 
 	// 3. Instantiate the "I need to go in adapter"
-	consoleAdapter := console.NewAdapter(hexagon)
+	ca := console.NewAdapter(hexagon)
 
 	var answers []domain.Answer
-	a, ok := consoleAdapter.Ask(answers)
+	a, ok := ca.Ask(answers)
 	for ok {
 		answers = append(answers, a)
-		a, ok = consoleAdapter.Ask(answers)
+		a, ok = ca.Ask(answers)
 	}
 }

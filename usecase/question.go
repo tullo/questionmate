@@ -8,7 +8,7 @@ import (
 
 // Left side port
 type QuestionReader interface {
-	NextQuestion(answers []domain.Answer) (domain.Question, bool)
+	NextQuestion(as []domain.Answer) (domain.Question, bool)
 }
 
 // Right side port
@@ -21,24 +21,24 @@ type questionRepository interface {
 
 // Hexagon
 type NextQuestion struct {
-	QuestionRepository questionRepository
+	QR questionRepository
 }
 
-func (nc NextQuestion) NextQuestion(answers []domain.Answer) (domain.Question, bool) {
-	questions := nc.QuestionRepository.GetQuestions()
-	unanswered := unanswered(answers, questions)
+func (nc NextQuestion) NextQuestion(as []domain.Answer) (domain.Question, bool) {
+	qs := nc.QR.GetQuestions()
+	unanswered := unanswered(as, qs)
 	if len(unanswered) > 0 {
-		question := byID(unanswered[0], questions)
-		if desc, ok := nc.QuestionRepository.GetDescriptions()[question.ID]; ok {
-			question.Desc = desc
+		q := byID(unanswered[0], qs)
+		if desc, ok := nc.QR.GetDescriptions()[q.ID]; ok {
+			q.Desc = desc
 		}
-		return question, true
+		return q, true
 	}
 	return domain.Question{}, false
 }
 
-func byID(id int, questions []domain.Question) domain.Question {
-	for _, q := range questions {
+func byID(id int, qs []domain.Question) domain.Question {
+	for _, q := range qs {
 		if q.ID == id {
 			return q
 		}
@@ -48,10 +48,10 @@ func byID(id int, questions []domain.Question) domain.Question {
 
 // unanswered returns an sorted array of unanswered question ids according to
 // the given answers.
-func unanswered(answers []domain.Answer, questions []domain.Question) []int {
+func unanswered(as []domain.Answer, qs []domain.Question) []int {
 	var unanswered []int
-	for _, q := range questions {
-		if !contains(q.ID, answers) {
+	for _, q := range qs {
+		if !contains(q.ID, as) {
 			unanswered = append(unanswered, q.ID)
 		}
 	}
@@ -59,8 +59,8 @@ func unanswered(answers []domain.Answer, questions []domain.Question) []int {
 	return unanswered
 }
 
-func contains(id int, answers []domain.Answer) bool {
-	for _, a := range answers {
+func contains(id int, as []domain.Answer) bool {
+	for _, a := range as {
 		if a.QuestionID == id {
 			return true
 		}

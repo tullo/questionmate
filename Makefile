@@ -19,7 +19,7 @@ console:
 	@go run world/console/main.go
 
 run:
-	@go run ./world/http/main.go -directory=${PWD}/config > /dev/null 2>&1
+	go run ./world/http/main.go -directory=${PWD}/config > /dev/null 2>&1
 
 test: export SRC_ROOT=${PWD}
 test:

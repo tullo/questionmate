@@ -85,7 +85,7 @@ func (Y YAMLParser) ParseQuestions(data []byte) []domain.Question {
 		log.Fatal(err)
 	}
 
-	var questions []domain.Question
+	var qs []domain.Question
 	for _, v := range m.Questions {
 		q := domain.NewQuestion(v.Id, v.Text)
 		for _, o := range v.Options {
@@ -95,10 +95,10 @@ func (Y YAMLParser) ParseQuestions(data []byte) []domain.Question {
 			}
 			q.Options = append(q.Options, option)
 		}
-		questions = append(questions, q)
+		qs = append(qs, q)
 
 	}
-	return questions
+	return qs
 }
 
 func (Y YAMLParser) ParseQuestionnaire(data []byte) domain.Questionnaire {

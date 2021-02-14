@@ -3,14 +3,14 @@ package usecase
 import "github.com/tullo/questionmate/domain"
 
 type Assessment struct {
-	QuestionRepository questionRepository
+	QR questionRepository
 }
 
-func (e Assessment) GetAssessment(answers []domain.Answer) domain.Assessment {
-	questions := e.QuestionRepository.GetQuestions()
+func (a Assessment) GetAssessment(as []domain.Answer) domain.Assessment {
+	qs := a.QR.GetQuestions()
 	assessment := domain.Assessment{}
-	for _, answer := range answers {
-		if q, ok := questionByID(questions, answer.QuestionID); ok {
+	for _, answer := range as {
+		if q, ok := questionByID(qs, answer.QuestionID); ok {
 			if o, ok := q.GetOption(answer.Value); ok {
 				for test, score := range o.Targets {
 					if t, ok := assessment.GetTarget(test); ok {
@@ -26,7 +26,7 @@ func (e Assessment) GetAssessment(answers []domain.Answer) domain.Assessment {
 		}
 	}
 
-	ratings := e.QuestionRepository.GetRatings()
+	ratings := a.QR.GetRatings()
 	for _, t := range assessment.Targets {
 		if values, ok := ratings[t.Text]; ok {
 			for _, v := range values {
@@ -41,10 +41,10 @@ func (e Assessment) GetAssessment(answers []domain.Answer) domain.Assessment {
 	return assessment
 }
 
-func questionByID(questions []domain.Question, id int) (domain.Question, bool) {
-	for _, question := range questions {
-		if question.ID == id {
-			return question, true
+func questionByID(qs []domain.Question, id int) (domain.Question, bool) {
+	for _, q := range qs {
+		if q.ID == id {
+			return q, true
 		}
 	}
 	return domain.Question{}, false

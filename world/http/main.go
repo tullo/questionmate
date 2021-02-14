@@ -22,28 +22,28 @@ func main() {
 		os.Exit(1)
 	}
 	fn := fmt.Sprintf("%s/config", wd)
-	directoryPtr := flag.String("directory", fn, "the directory")
+	dir := flag.String("directory", fn, "the directory")
 	flag.Parse()
 
-	// 1. Instantiate the "I need to go out adapter."
-	repositoryAdapter := file.NewQuestionRepository(*directoryPtr+"/coma", parser.YAMLParser{})
+	// 1. Instantiate repository.
+	repo := file.NewQuestionnaireRepository(*dir+"/coma", parser.YAMLParser{})
 
-	// 2. Instantiate the hexagons.
-	getQuestionnaire := usecase.NewGetQuestionnaire()
-	getQuestionnaire.Repositories["coma"] = repositoryAdapter
+	// 2. Instantiate hexagons.
+	questionnaire := usecase.NewGetQuestionnaire()
+	questionnaire.Repositories["coma"] = repo
 
-	hexagon := usecase.NextQuestion{QuestionRepository: repositoryAdapter}
-	evaluator := usecase.Assessment{QuestionRepository: repositoryAdapter}
+	hexagon := usecase.NextQuestion{QR: repo}
+	evaluator := usecase.Assessment{QR: repo}
 
-	// 3. Instantiate the "I need to go in adapter"
-	getQuestionnaireHTTPAdapter := httpadapter.MakeGetQuestionnaireHandler(getQuestionnaire)
-	nextQuestionHTTPAdapter := httpadapter.MakeNextQuestionHandler(hexagon)
-	evaluatorHTTPAdapter := httpadapter.MakeAssessmentHandler(evaluator)
+	// 3. Instantiate handlers.
+	qh := httpadapter.NewGetQuestionnaireHandler(questionnaire)
+	next := httpadapter.NewNextQuestionHandler(hexagon)
+	ah := httpadapter.NewAssessmentHandler(evaluator)
 
 	r := mux.NewRouter()
-	r.HandleFunc("/{questionnaire}", getQuestionnaireHTTPAdapter).Methods("GET")
-	r.HandleFunc("/{questionnaire}/questions", nextQuestionHTTPAdapter).Methods("POST")
-	r.HandleFunc("/{questionnaire}/assessment", evaluatorHTTPAdapter).Methods("POST")
+	r.HandleFunc("/{questionnaire}", qh).Methods("GET")
+	r.HandleFunc("/{questionnaire}/questions", next).Methods("POST")
+	r.HandleFunc("/{questionnaire}/assessment", ah).Methods("POST")
 	log.Printf("Service listening on http://localhost:8080...")
 	handler := cors.AllowAll().Handler(r)
 	_ = http.ListenAndServe(":8080", handler)
